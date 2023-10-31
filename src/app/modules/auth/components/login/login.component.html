@@ -1,0 +1,17 @@
+<div class="container-fluid mt-3 d-flex flex-column align-items-center">
+    <h4>Login Account</h4>
+    <form class="mt-4" [formGroup]="credentialForm" (ngSubmit)="onFormSubmit()">
+        <div class="mb-3">
+            <input type="email" class="form-control" placeholder="Email" formControlName="email">
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" placeholder="Password" formControlName="password">
+            <div class="d-flex justify-content-end">
+                <a href="/auth/recovery" class="mt-2 link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Forget Password</a>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+    <a href="/auth/signup" class="mt-4 link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Need an Account</a>
+    <h6 class="mt-5">copyright @ conceptune.com | 2023</h6>
+</div>

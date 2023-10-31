@@ -1,0 +1,74 @@
+<div class="container-fluid mt-3 d-flex flex-column align-items-center">
+    <h4>Signup Account</h4>
+
+    <div *ngIf="formIndex === 0">
+        <form class="mt-4" [formGroup]="nameForm" (ngSubmit)="onFormSubmit()">
+            <div class="mb-3">
+                <small>Enter your name</small>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+            </div>
+            <div class="mb-3">
+                <small>
+                    while signing up, you are accepting our <br>
+                    <a href="#">terms and conditions</a> and <a href="#">privacy policy</a>.
+                </small>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+        </form>
+    </div>
+
+    <div *ngIf="formIndex === 1">
+        <form class="mt-4" [formGroup]="detailForm" (ngSubmit)="onFormSubmit()">
+            <div class="mb-3">
+                <small>Enter Email and Gender</small>
+            </div>
+            <div class="mb-3">
+                <input type="email" class="form-control" placeholder="Email" formControlName="email">
+            </div>
+            <div class="mb-3">
+                <select class="form-select" aria-label="Gender Selection" formControlName="gender">
+                    <option selected>Gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Others</option>
+                  </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Next</button>
+        </form>
+    </div>
+
+    <div *ngIf="formIndex === 2">
+        <form class="mt-4" [formGroup]="passwordForm" (ngSubmit)="onFormSubmit()">
+            <div class="mb-3">
+                <small>Create your account password</small>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" placeholder="Password" formControlName="password">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Finish Up</button>
+        </form>
+    </div>
+
+    <div *ngIf="formIndex === 3">
+        <form class="mt-4" [formGroup]="verificationForm" (ngSubmit)="onFormSubmit()">
+            <div class="mb-3">
+                <small>Enter the OTP sent to your email</small>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="OTP" formControlName="otp">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Verify</button>
+        </form>
+    </div>
+
+    <a href="/auth/login" class="mt-4 link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Already a Customer</a>
+    <h6 class="mt-5">copyright @ conceptune.com | 2023</h6>
+</div>
