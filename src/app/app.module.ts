@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthorizationService } from './services/authorization.service';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthorizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

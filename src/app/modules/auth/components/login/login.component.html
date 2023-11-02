@@ -1,6 +1,9 @@
 <div class="container-fluid mt-3 d-flex flex-column align-items-center">
     <h4>Login Account</h4>
-    <form class="mt-4" [formGroup]="credentialForm" (ngSubmit)="onFormSubmit()">
+    <div *ngIf="error !== null" class="alert alert-danger" role="alert">
+        <strong>Oops!</strong> {{error}}
+    </div>
+    <form class="mt-1" [formGroup]="credentialForm" (ngSubmit)="onFormSubmit()">
         <div class="mb-3">
             <input type="email" class="form-control" placeholder="Email" formControlName="email">
         </div>

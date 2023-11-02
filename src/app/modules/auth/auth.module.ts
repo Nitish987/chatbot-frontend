@@ -9,6 +9,7 @@ import { RecoveryComponent } from './components/recovery/recovery.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 
 
 @NgModule({
@@ -24,6 +25,6 @@ import { AuthService } from './services/auth.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthService]
+  providers: [AuthService, AuthorizationService]
 })
 export class AuthModule { }

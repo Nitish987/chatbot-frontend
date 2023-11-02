@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { AuthorizationService } from 'src/app/services/authorization.service';
+import { ResponseCollector } from 'src/app/utils/response-collector';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -8,7 +10,7 @@ import { environment } from 'src/environments/environment.development';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authorizationService: AuthorizationService) { }
 
   signup({firstName, lastName, gender, email, password} : {firstName: string, lastName: string, gender: string, email: string, password: string}): Observable<any> {
     return this.http.post(`${environment.url}/account/v1/signup/`, {
@@ -23,7 +25,17 @@ export class AuthService {
         aak: environment.key
       },
       withCredentials: true
-    });
+    }).pipe(map(res => {
+      try {
+        const collector = new ResponseCollector(res);
+        if (collector.success()) {
+          this.authorizationService.saveClientAuthData(collector.data());
+        }
+        return res;
+      } catch(e) {
+        return res;
+      }
+    }));
   }
 
   signupVerification(otp: string): Observable<any> {
@@ -50,6 +62,16 @@ export class AuthService {
         aak: environment.key,
       },
       withCredentials: true
-    });
+    }).pipe(map(res => {
+      try {
+        const collector = new ResponseCollector(res);
+        if (collector.success()) {
+          this.authorizationService.saveClientAuthData(collector.data());
+        }
+        return res;
+      } catch(e) {
+        return res;
+      }
+    }));
   }
 }

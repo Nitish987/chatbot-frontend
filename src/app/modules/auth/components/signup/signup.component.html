@@ -1,8 +1,12 @@
 <div class="container-fluid mt-3 d-flex flex-column align-items-center">
     <h4>Signup Account</h4>
 
+    <div *ngIf="error !== null" class="alert alert-danger" role="alert">
+        <strong>Oops!</strong> {{error}}
+    </div>
+
     <div *ngIf="formIndex === 0">
-        <form class="mt-4" [formGroup]="nameForm" (ngSubmit)="onFormSubmit()">
+        <form class="mt-1" [formGroup]="nameForm" (ngSubmit)="onFormSubmit()">
             <div class="mb-3">
                 <small>Enter your name</small>
             </div>
@@ -23,7 +27,7 @@
     </div>
 
     <div *ngIf="formIndex === 1">
-        <form class="mt-4" [formGroup]="detailForm" (ngSubmit)="onFormSubmit()">
+        <form class="mt-1" [formGroup]="detailForm" (ngSubmit)="onFormSubmit()">
             <div class="mb-3">
                 <small>Enter Email and Gender</small>
             </div>
@@ -43,7 +47,7 @@
     </div>
 
     <div *ngIf="formIndex === 2">
-        <form class="mt-4" [formGroup]="passwordForm" (ngSubmit)="onFormSubmit()">
+        <form class="mt-1" [formGroup]="passwordForm" (ngSubmit)="onFormSubmit()">
             <div class="mb-3">
                 <small>Create your account password</small>
             </div>
@@ -58,7 +62,7 @@
     </div>
 
     <div *ngIf="formIndex === 3">
-        <form class="mt-4" [formGroup]="verificationForm" (ngSubmit)="onFormSubmit()">
+        <form class="mt-1" [formGroup]="verificationForm" (ngSubmit)="onFormSubmit()">
             <div class="mb-3">
                 <small>Enter the OTP sent to your email</small>
             </div>
