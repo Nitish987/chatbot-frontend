@@ -9,8 +9,8 @@ export class AuthorizationService {
 
   constructor() { }
 
-  isAuthenticated() {
-    return this.getUserId() && this.getAuthorizationToken();
+  isAuthenticated(): boolean {
+    return this.getUserId() !== null && this.getAuthorizationToken() !== null;
   }
 
   saveClientAuthData(data: {uid: string, at: string}) {

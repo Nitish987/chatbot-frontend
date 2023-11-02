@@ -80,4 +80,44 @@ export class AuthService {
       }
     }));
   }
+
+  recoverPassword(email: string) {
+    return this.http.post(`${environment.url}/account/v1/recovery-password/`, { email }, {
+      headers: {
+        aak: environment.key,
+        ack: environment.ack
+      },
+      withCredentials: true
+    }); 
+  }
+
+  recoverPasswordVerification(otp: string) {
+    return this.http.post(`${environment.url}/account/v1/recovery-password-verify/`, { otp }, {
+      headers: {
+        aak: environment.key,
+        ack: environment.ack
+      },
+      withCredentials: true
+    }); 
+  }
+
+  recoverNewPassword(password: string) {
+    return this.http.post(`${environment.url}/account/v1/recovery-password-new/`, { password }, {
+      headers: {
+        aak: environment.key,
+        ack: environment.ack
+      },
+      withCredentials: true
+    }); 
+  }
+
+  recoverPasswordResentVerificationOtp() {
+    return this.http.post(`${environment.url}/account/v1/recovery-password-resent-otp/`, {}, {
+      headers: {
+        aak: environment.key,
+        ack: environment.ack
+      },
+      withCredentials: true
+    }); 
+  }
 }
