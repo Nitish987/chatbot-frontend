@@ -5,6 +5,10 @@
         <strong>Oops!</strong> {{error}}
     </div>
 
+    <div *ngIf="success !== null" class="alert alert-success" role="alert">
+        <strong>Success!</strong> {{success}}
+    </div>
+
     <div *ngIf="formIndex === 0">
         <form class="mt-1" [formGroup]="nameForm" (ngSubmit)="onFormSubmit()">
             <div class="mb-3">
@@ -71,6 +75,9 @@
             </div>
             <button type="submit" class="btn btn-primary w-100">Verify</button>
         </form>
+        <div class="d-flex justify-content-center mt-2">
+            <button class="btn btn-link" type="button" (click)="resentVerificationOtp()">Resent OTP again</button>
+        </div>
     </div>
 
     <a href="/auth/login" class="mt-4 link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Already a Customer</a>

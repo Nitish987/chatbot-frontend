@@ -27,6 +27,7 @@ export class SignupComponent {
     otp: new FormControl('', [Validators.required, Validators.maxLength(6)])
   });
   error: string | null = null;
+  success: string | null = null;
 
   constructor(private auth: AuthService, private router: Router) { }
 
@@ -36,6 +37,7 @@ export class SignupComponent {
   }
 
   onFormSubmit() {
+    this.success = null;
     switch (this.formIndex) {
       case 0:
         if (!this.nameForm.controls.firstName.valid) {
@@ -103,6 +105,8 @@ export class SignupComponent {
             try {
               const collector = new ResponseCollector(res);
               if (collector.success()) {
+                this.error = null;
+                this.success = null;
                 this.router.navigateByUrl('/auth/login');
               } else {
                 this.error = collector.error();
@@ -114,5 +118,21 @@ export class SignupComponent {
         }
       break;
     }
+  }
+
+  resentVerificationOtp() {
+    this.error = null;
+    this.auth.signupResentVerificionOtp().subscribe(res => {
+      try {
+        const collector = new ResponseCollector(res);
+        if (collector.success()) {
+          this.success = 'OTP resent successfully.'
+        } else {
+          this.error = collector.error();
+        }
+      } catch(e) {
+        this.error = 'Something went wrong.';
+      }
+    });
   }
 }

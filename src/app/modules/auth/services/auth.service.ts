@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   signupVerification(otp: string): Observable<any> {
-    return this.http.post(`${environment.url}/account/v1/signup/verify/`, {
+    return this.http.post(`${environment.url}/account/v1/signup-verify/`, {
       otp: otp
     }, {
       headers: {
@@ -50,9 +50,15 @@ export class AuthService {
     });
   }
 
-  // signupResentVerificionOtp(): Observable<any> {
-  //   return 
-  // }
+  signupResentVerificionOtp(): Observable<any> {
+    return this.http.post(`${environment.url}/account/v1/signup-resent-otp/`, {}, {
+      headers: {
+        aak: environment.key,
+        ack: environment.ack
+      },
+      withCredentials: true
+    }); 
+  }
 
   login({email, password}: {email: string, password: string}): Observable<any> {
     return this.http.post(`${environment.url}/account/v1/login/`, {
