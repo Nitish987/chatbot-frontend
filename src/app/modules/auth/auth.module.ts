@@ -7,9 +7,9 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { RecoveryComponent } from './components/recovery/recovery.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './services/auth.service';
-import { AuthorizationService } from 'src/app/services/authorization.service';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthorizationService } from 'src/app/services/auth/authorization.service';
+import { HttpService } from 'src/app/services/http/http.service';
 
 
 @NgModule({
@@ -22,9 +22,12 @@ import { AuthorizationService } from 'src/app/services/authorization.service';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    ReactiveFormsModule
   ],
-  providers: [AuthService, AuthorizationService]
+  providers: [
+    AuthenticationService, 
+    AuthorizationService, 
+    HttpService
+  ]
 })
 export class AuthModule { }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ResponseCollector } from 'src/app/utils/response-collector';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ export class LoginComponent {
   });
   error: string | null = null;
   
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthenticationService, private router: Router) {}
 
   onFormSubmit() {
     if (!this.credentialForm.controls.email.valid) {

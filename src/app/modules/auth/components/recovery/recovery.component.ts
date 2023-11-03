@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import { ResponseCollector } from 'src/app/utils/response-collector';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
@@ -25,7 +25,7 @@ export class RecoveryComponent {
   error: string | null = null;
   success: string | null = null;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthenticationService, private router: Router) {}
 
   nextFormIndex() {
     this.error = null;
