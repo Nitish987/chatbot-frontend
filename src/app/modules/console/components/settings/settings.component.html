@@ -1,1 +1,105 @@
-<p>settings works!</p>
+<div class="c-settings">
+    <h3>Settings</h3>
+    <div class="accordion mt-3" id="settingsAccordion">
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProfile"
+                    aria-expanded="true" aria-controls="collapseProfile">
+                    Profile
+                </button>
+            </h2>
+            <div id="collapseProfile" class="accordion-collapse collapse show" data-bs-parent="#settingsAccordion">
+                <div class="accordion-body">
+                    <div class="profile-container">
+                        <div class="profile-pic">
+                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                                alt="profile-pic">
+                            <button class="btn btn-primary rounded-5">
+                                <i class="bi bi-camera"></i>
+                            </button>
+                        </div>
+                        <div class="profile-name">
+                            <form>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="First Name">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Last Name">
+                                </div>
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseEmail" aria-expanded="false" aria-controls="collapseEmail">
+                    Account Email
+                </button>
+            </h2>
+            <div id="collapseEmail" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+                <div class="accordion-body">
+                    <p>Your linked account email is <strong class="text-success">someone@email.com</strong></p>
+                    <button class="btn btn-primary">I want to change account email</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsePassword" aria-expanded="false" aria-controls="collapsePassword">
+                    Account password
+                </button>
+            </h2>
+            <div id="collapsePassword" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+                <div class="accordion-body">
+                    <strong>Create new account password.</strong>
+                    <div class="alert alert-info mt-2" role="alert">
+                        All the session will be logged out, In case you change your password.
+                    </div>
+                    <form class="mt-2 w-50">
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Current Password">
+                            <div class="d-flex justify-content-end">
+                                <a href="/auth/recovery" class="mt-2 link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Forget Password</a>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="New Password">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Confirm Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseConceptune" aria-expanded="false" aria-controls="collapseConceptune">
+                    Conceptune
+                </button>
+            </h2>
+            <div id="collapseConceptune" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+                <div class="accordion-body">
+                    <strong>About Conceptune</strong> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, reprehenderit?
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

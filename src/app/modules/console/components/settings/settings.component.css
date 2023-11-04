@@ -1,0 +1,30 @@
+.c-settings {
+    max-width: 800px;
+    padding: 10px;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.profile-pic {
+    position: relative;
+}
+
+.profile-pic,
+.profile-pic img {
+    width: 150px;
+    height: 150px;
+}
+
+.profile-pic img {
+    border-radius: 100%;
+}
+
+.profile-pic button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
