@@ -19,7 +19,11 @@ export class AuthenticationService {
       email: email,
       password: password,
       msg_token: ''
-    }, false).pipe(map(res => {
+    }, false);
+  }
+
+  signupVerification(otp: string): Observable<any> {
+    return this.http.post('/account/v1/signup-verify/', {otp: otp}, false).pipe(map(res => {
       try {
         const collector = new ResponseCollector(res);
         if (collector.success()) {
@@ -30,10 +34,6 @@ export class AuthenticationService {
         return res;
       }
     }));
-  }
-
-  signupVerification(otp: string): Observable<any> {
-    return this.http.post('/account/v1/signup-verify/', {otp: otp}, false);
   }
 
   signupResentVerificionOtp(): Observable<any> {

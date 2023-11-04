@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ConsoleRoutingModule } from './console-routing.module';
 import { MainComponent } from './components/main/main.component';
+import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { MainComponent } from './components/main/main.component';
   imports: [
     CommonModule,
     ConsoleRoutingModule
-  ]
+  ],
+  providers: [AuthorizationService]
 })
 export class ConsoleModule { }
