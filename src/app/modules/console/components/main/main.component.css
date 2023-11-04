@@ -4,17 +4,30 @@
 }
 
 .console-sidebar-container {
+    position: fixed;
     width: 250px;
     height: 100%;
-    border-right: 0.5px solid #f8f9fa;
+    border-right: 0.5px solid #dee2e6;
 }
 
 .console-main-container {
     flex-grow: 1;
+    margin-left: 250px;
+    padding: 20px 50px;
+}
+
+.console-sidebar-container,
+.console-main-container {
+    transition: 0.5s;
 }
 
 @media screen and (max-width: 768px) {
     .console-sidebar-container {
         width: 60px;
+    }
+
+    .console-main-container {
+        margin-left: 56px;
+        padding: 10px;
     }
 }

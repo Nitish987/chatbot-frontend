@@ -10,6 +10,8 @@ import { ProjectComponent } from './components/project/project.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { BillingComponent } from './components/billing/billing.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProfilePicChangeComponent } from './components/settings/components/profile-pic-change/profile-pic-change.component';
+import { EmailChangeComponent } from './components/settings/components/email-change/email-change.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     ProjectComponent,
     SettingsComponent,
     BillingComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfilePicChangeComponent,
+    EmailChangeComponent
   ],
   imports: [
     CommonModule,

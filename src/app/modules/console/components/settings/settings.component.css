@@ -1,6 +1,5 @@
 .c-settings {
     max-width: 800px;
-    padding: 10px;
 }
 
 .profile-container {
@@ -27,4 +26,12 @@
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+@media screen and (max-width: 540px) {
+    .profile-container {
+        flex-direction: column;
+        justify-content: stretch;
+        align-items: center;
+    }
 }
