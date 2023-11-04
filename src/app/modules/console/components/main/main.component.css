@@ -1,0 +1,20 @@
+.console-main {
+    display: flex;
+    height: calc(100vh - 56px);
+}
+
+.console-sidebar-container {
+    width: 250px;
+    height: 100%;
+    border-right: 0.5px solid #f8f9fa;
+}
+
+.console-main-container {
+    flex-grow: 1;
+}
+
+@media screen and (max-width: 768px) {
+    .console-sidebar-container {
+        width: 60px;
+    }
+}

@@ -6,5 +6,11 @@ export const authRoute = Object.freeze({
 });
 
 export const consoleRoute = Object.freeze({
-    main: 'console'
+    main: 'console',
+    childRoute: {
+        dashboard: 'dashboard',
+        project: 'project/:id',
+        billing: 'billing',
+        settings: 'settings'
+    }
 });

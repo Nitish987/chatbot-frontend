@@ -1,0 +1,9 @@
+.c-sidebar {
+    padding: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .c-sidebar span {
+        display: none;
+    }
+}
