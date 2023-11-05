@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { AuthorizationService } from '../auth/authorization.service';
 
@@ -13,10 +13,10 @@ export class HttpService {
   constructor(private http: HttpClient, private authorizatonService: AuthorizationService) { }
 
   private getAuthHeaders() {
-    const headers = new HttpHeaders();
-    headers.append('Authorization', this.authorizatonService.getAuthorizationToken()!);
-    headers.append('Uid', this.authorizatonService.getUserId()!);
-    return headers;
+    return {
+      'Authorization': 'Bearer ' + this.authorizatonService.getAuthorizationToken()!,
+      'Uid': this.authorizatonService.getUserId()!
+    };
   }
 
   get(url: string, withAuthHeaders = true): Observable<any> {

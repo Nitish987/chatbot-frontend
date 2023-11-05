@@ -5,18 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthorizationService } from './services/auth/authorization.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserIdentityComponent } from './components/user-identity/user-identity.component';
+import { HttpService } from './services/http/http.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserIdentityComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AuthorizationService],
+  providers: [AuthorizationService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

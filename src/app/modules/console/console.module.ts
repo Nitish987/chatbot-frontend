@@ -12,6 +12,7 @@ import { BillingComponent } from './components/billing/billing.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfilePicChangeComponent } from './components/settings/components/profile-pic-change/profile-pic-change.component';
 import { EmailChangeComponent } from './components/settings/components/email-change/email-change.component';
+import { UserIdentityService } from 'src/app/services/user-identity/user-identity.service';
 
 
 @NgModule({
@@ -30,6 +31,6 @@ import { EmailChangeComponent } from './components/settings/components/email-cha
     CommonModule,
     ConsoleRoutingModule
   ],
-  providers: [AuthorizationService]
+  providers: [AuthorizationService, UserIdentityService]
 })
 export class ConsoleModule { }
