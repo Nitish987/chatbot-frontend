@@ -1,13 +1,16 @@
 <button id="userIdentityBtn" class="d-none" data-bs-toggle="modal" data-bs-target="#userIdentity">User Identity</button>
-<div class="modal fade" id="userIdentity" tabindex="-1" aria-labelledby="userIdentityLabel" aria-hidden="true" >
+<div class="modal fade" id="userIdentity" tabindex="-1" aria-labelledby="userIdentityLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="userIdentityLabel">Verify it's You</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelService()"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <div *ngIf="error !== null" class="alert alert-danger">
+            <strong>Oops!</strong> {{error}}
+          </div>
+          <form [formGroup]="verificationForm">
             <div class="mb-3">
                 <small>Enter the OTP sent to your email</small>
             </div>
@@ -17,8 +20,8 @@
         </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Verify</button>
+          <button type="button" id="userIdentityCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelService()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="verifyIdentity()">Verify</button>
         </div>
       </div>
     </div>

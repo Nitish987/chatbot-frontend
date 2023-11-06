@@ -13,6 +13,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfilePicChangeComponent } from './components/settings/components/profile-pic-change/profile-pic-change.component';
 import { EmailChangeComponent } from './components/settings/components/email-change/email-change.component';
 import { UserIdentityService } from 'src/app/services/user-identity/user-identity.service';
+import { SettingsService } from './services/settings/settings.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -29,8 +31,13 @@ import { UserIdentityService } from 'src/app/services/user-identity/user-identit
   ],
   imports: [
     CommonModule,
-    ConsoleRoutingModule
+    ConsoleRoutingModule,
+    ReactiveFormsModule
   ],
-  providers: [AuthorizationService, UserIdentityService]
+  providers: [
+    AuthorizationService, 
+    UserIdentityService,
+    SettingsService
+  ]
 })
 export class ConsoleModule { }

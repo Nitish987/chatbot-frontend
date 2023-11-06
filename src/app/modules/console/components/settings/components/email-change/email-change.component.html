@@ -1,1 +1,47 @@
-<p>email-change works!</p>
+<button id="emailChangeBtn" class="d-none" data-bs-toggle="modal" data-bs-target="#emailChange"></button>
+<div class="modal fade" id="emailChange" tabindex="-1" aria-labelledby="emailChangeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="emailChangeLabel">Your New Email</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onCancel()"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngIf="error !== null" class="alert alert-danger">
+            <strong>Oops!</strong> {{error}}
+          </div>
+
+          <div *ngIf="formIndex === 0">
+            <form [formGroup]="emailForm">
+                <div class="mb-3">
+                    <small>Enter your new Email</small>
+                </div>
+                <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                </div>
+            </form>
+          </div>
+
+          <div *ngIf="formIndex === 1">
+            <form [formGroup]="verificationForm">
+                <div class="mb-3">
+                    <small>Enter the the OTP sent to your new Email</small>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="OTP" formControlName="otp">
+                </div>
+            </form>
+          </div>
+
+          <div *ngIf="formIndex === 2" class="alert alert-primary">
+            <strong>Done!</strong> Email change successful.
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onCancel()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="start()">{{formIndex === 0 ? "Next" : formIndex === 1 ? "Verify" : "Done"}}</button>
+        </div>
+      </div>
+    </div>
+  </div>

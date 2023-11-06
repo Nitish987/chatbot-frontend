@@ -7,6 +7,7 @@ import { AuthorizationService } from './services/auth/authorization.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserIdentityComponent } from './components/user-identity/user-identity.component';
 import { HttpService } from './services/http/http.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HttpService } from './services/http/http.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [AuthorizationService, HttpService],
   bootstrap: [AppComponent]

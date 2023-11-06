@@ -7,9 +7,16 @@ import { UserIdentityService } from 'src/app/services/user-identity/user-identit
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent {
-  constructor(private identityService: UserIdentityService) { }
+  constructor(private identityService: UserIdentityService) {
+    this.identityService.getVerified().subscribe(isVerified => {
+      if (isVerified) {
+        this.identityService.cancel();
+        document.getElementById("emailChangeBtn")?.click();
+      }
+    });
+  }
 
   iWantToChangeMyEmail() {
-    this.identityService.initiate().subscribe(void 0);
+    this.identityService.initiate();
   }
 }
