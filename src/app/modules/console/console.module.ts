@@ -15,6 +15,7 @@ import { EmailChangeComponent } from './components/settings/components/email-cha
 import { UserIdentityService } from 'src/app/services/user-identity/user-identity.service';
 import { SettingsService } from './services/settings/settings.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from 'src/app/services/auth/user.service';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   providers: [
     AuthorizationService, 
     UserIdentityService,
-    SettingsService
+    SettingsService,
+    UserService
   ]
 })
 export class ConsoleModule { }

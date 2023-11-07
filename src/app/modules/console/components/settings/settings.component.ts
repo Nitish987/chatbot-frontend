@@ -5,6 +5,8 @@ import { SettingsService } from '../../services/settings/settings.service';
 import { timer } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
+import { Profile } from 'src/app/models/profile';
+import { UserService } from 'src/app/services/auth/user.service';
 
 @Component({
   selector: 'app-settings',
@@ -17,14 +19,29 @@ export class SettingsComponent {
     newPass: new FormControl('', [Validators.required]),
     confirmNewPass: new FormControl('', [Validators.required])
   });
-  error: string | null = null;
-  success: string | null = null;
+  passwordFromError: string | null = null;
+  passwordFromsuccess: string | null = null;
+  profile: Profile | null = null;
+  nameForm = new FormGroup({
+    firstName: new FormControl(''),
+    lastName: new FormControl('')
+  })
 
   constructor(private identityService: UserIdentityService, private settingsService: SettingsService, private router: Router, private authorizationService: AuthorizationService) {
     this.identityService.getVerified().subscribe(isVerified => {
       if (isVerified) {
         this.identityService.cancel();
         document.getElementById("emailChangeBtn")?.click();
+      }
+    });
+    UserService.user$.subscribe(user => {
+      if (user !== null) {
+        this.profile = user.profile;
+        const fullName = this.profile.name.split(' ');
+        this.nameForm.setValue({
+          firstName: fullName[0],
+          lastName: fullName[1]
+        })
       }
     });
   }
@@ -34,14 +51,14 @@ export class SettingsComponent {
   }
 
   changePassword() {
-    this.error = null;
-    this.success = null;
+    this.passwordFromError = null;
+    this.passwordFromsuccess = null;
     if (!this.passwordForm.valid) {
-      this.error = "Password fields are empty."
+      this.passwordFromError = "Password fields are empty."
       return;
     }
     if (this.passwordForm.value.newPass !== this.passwordForm.value.confirmNewPass) {
-      this.error = "Password doesn't match."
+      this.passwordFromError = "Password doesn't match."
       return;
     }
 
@@ -50,12 +67,12 @@ export class SettingsComponent {
       newPassword: this.passwordForm.value.confirmNewPass!
     }).subscribe(res => {
       if (res.success()) {
-        this.success = res.data()['message'];
+        this.passwordFromsuccess = res.data()['message'];
         timer(2000).subscribe(millis => {
           this.router.navigateByUrl('/auth/login');
         });
       } else {
-        this.error = res.error();
+        this.passwordFromError = res.error();
       }
     });
   }
