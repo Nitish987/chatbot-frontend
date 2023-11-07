@@ -23,9 +23,10 @@ export class SettingsComponent {
   passwordFromsuccess: string | null = null;
   profile: Profile | null = null;
   nameForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl('')
-  })
+    firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(2)])
+  });
+  nameFormMessage: string | null = null;
 
   constructor(private identityService: UserIdentityService, private settingsService: SettingsService, private router: Router, private authorizationService: AuthorizationService) {
     this.identityService.getVerified().subscribe(isVerified => {
@@ -80,5 +81,27 @@ export class SettingsComponent {
   onForgetPassword() {
     this.authorizationService.deleteClientAuthData();
     this.router.navigateByUrl('/auth/recovery');
+  }
+
+  changeName() {
+    if (this.nameForm.valid) {
+      this.settingsService.changeName({
+        firstName: this.nameForm.value.firstName!,
+        lastName: this.nameForm.value.lastName!
+      }).subscribe(res => {
+        if (res.success()) {
+          this.nameFormMessage = res.data()['message'];
+        } else {
+          this.nameFormMessage = res.error();
+        }
+        timer(2000).subscribe(millis => {
+          this.nameFormMessage = null;
+        })
+      });
+    }
+  }
+
+  openPicChangeDialog() {
+    document.getElementById('profilePicChangeBtn')?.click();
   }
 }

@@ -10,7 +10,7 @@ import { ResponseCollector } from 'src/app/utils/response-collector';
 })
 export class UserService {
   static user$ = new BehaviorSubject<User | null>(null);
-  static user: User | null = null;
+  private static user: User | null = null;
 
   constructor(private authorization: AuthorizationService, private http: HttpService) { }
 
@@ -33,6 +33,18 @@ export class UserService {
           this.setUser(res.data());
         }
       });
+    }
+  }
+
+  updateName(name: string) {
+    if (UserService.user !== null) {
+      this.setUser({ ...UserService.user, profile: {...UserService.user.profile, name: name }});
+    }
+  }
+
+  updatePhoto(photo: string) {
+    if (UserService.user !== null) {
+      this.setUser({ ...UserService.user, profile: {...UserService.user.profile, photo: photo }});
     }
   }
 }

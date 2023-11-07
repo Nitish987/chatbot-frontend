@@ -1,1 +1,26 @@
-<p>profile-pic-change works!</p>
+<button id="profilePicChangeBtn" class="d-none" data-bs-toggle="modal" data-bs-target="#profilePicChange"></button>
+<div class="modal fade" id="profilePicChange" tabindex="-1" aria-labelledby="profilePicChangeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="profilePicChangeLabel">Upload Profile Pic</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="error !== null" class="alert alert-danger">
+                    <strong>Oops!</strong> {{error}}
+                </div>
+
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Choose Pic</label>
+                    <input class="form-control" type="file" id="formFile" accept="image/*" #fileInput>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #closeBtn>Close</button>
+                <button type="button" class="btn btn-primary" (click)="changePic(fileInput, closeBtn)">Change</button>
+            </div>
+        </div>
+    </div>
+</div>
