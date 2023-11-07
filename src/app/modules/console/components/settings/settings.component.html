@@ -67,18 +67,24 @@
                     <div class="alert alert-info mt-2" role="alert">
                         All the session will be logged out, In case you change your password.
                     </div>
-                    <form class="mt-2">
+                    <div *ngIf="error !== null" class="alert alert-danger">
+                        <strong>Oops!</strong> {{error}}
+                    </div>
+                    <div *ngIf="success !== null" class="alert alert-success">
+                        <strong>Done!</strong> {{success}}
+                    </div>
+                    <form class="mt-2" [formGroup]="passwordForm" (ngSubmit)="changePassword()">
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Current Password">
+                            <input type="password" class="form-control" placeholder="Current Password" formControlName="currentPass">
                             <div class="d-flex justify-content-end">
-                                <a href="/auth/recovery" class="mt-2 link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Forget Password</a>
+                                <a href="javascript:void(0)" class="mt-2 link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" (click)="onForgetPassword()">Forget Password</a>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="New Password">
+                            <input type="password" class="form-control" placeholder="New Password" formControlName="newPass">
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Confirm Password">
+                            <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirmNewPass">
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>
