@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ConsoleRoutingModule } from './console-routing.module';
 import { MainComponent } from './components/main/main.component';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NavbarComponent } from './components/main/components/navbar/navbar.component';
+import { SidebarComponent } from './components/main/components/sidebar/sidebar.component';
 import { ProjectComponent } from './components/project/project.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { BillingComponent } from './components/billing/billing.component';
@@ -16,6 +16,8 @@ import { UserIdentityService } from 'src/app/services/user-identity/user-identit
 import { SettingsService } from './services/settings/settings.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from 'src/app/services/auth/user.service';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { ProjectService } from './services/project/project.service';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { UserService } from 'src/app/services/auth/user.service';
     BillingComponent,
     DashboardComponent,
     ProfilePicChangeComponent,
-    EmailChangeComponent
+    EmailChangeComponent,
+    CreateProjectComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ import { UserService } from 'src/app/services/auth/user.service';
     AuthorizationService, 
     UserIdentityService,
     SettingsService,
-    UserService
+    UserService,
+    ProjectService
   ]
 })
 export class ConsoleModule { }

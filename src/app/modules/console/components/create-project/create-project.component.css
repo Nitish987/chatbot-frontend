@@ -1,0 +1,9 @@
+.c-create-project {
+    max-width: 800px;
+}
+
+@media screen and (max-width: 600px) {
+    .c-envtype-block {
+        flex-direction: column;
+    }
+}

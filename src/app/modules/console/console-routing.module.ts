@@ -6,6 +6,7 @@ import { ProjectComponent } from './components/project/project.component';
 import { BillingComponent } from './components/billing/billing.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
       {
         path: consoleRoute.childRoute.dashboard,
         component: DashboardComponent
+      },
+      {
+        path: consoleRoute.childRoute.createProject,
+        component: CreateProjectComponent
       },
       {
         path: consoleRoute.childRoute.project,
