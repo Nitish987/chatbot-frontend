@@ -20,6 +20,14 @@ export class CreateProjectComponent {
 
   onSubmit() {
     this.error = null;
+    if (!this.projectFrom.controls.name.valid) {
+      this.error = 'Name must have atleast 5 character and max to 50 characters.';
+      return;
+    }
+    if (!this.projectFrom.controls.description.valid) {
+      this.error = 'Description must have atleast 20 character and max to 200 characters.';
+      return;
+    }
     if (this.projectFrom.valid) {
       this.projectService.createProject({
         name: this.projectFrom.value.name!,

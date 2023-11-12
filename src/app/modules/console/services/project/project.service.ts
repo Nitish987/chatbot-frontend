@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
+import { Project } from 'src/app/models/project';
 import { HttpService } from 'src/app/services/http/http.service';
 import { ResponseCollector } from 'src/app/utils/response-collector';
 
@@ -7,13 +8,40 @@ import { ResponseCollector } from 'src/app/utils/response-collector';
   providedIn: 'root'
 })
 export class ProjectService {
+  static projects$ = new BehaviorSubject<Project[]>([]);
+  private static projects: Project[] = [];
 
   constructor(private http: HttpService) { }
+
+  private loadProjects(projects: Project[]) {
+    ProjectService.projects = projects;
+    ProjectService.projects$.next(ProjectService.projects);
+  }
+
+  private appendProject(project: Project) {
+    ProjectService.projects.push(project);
+    ProjectService.projects$.next(ProjectService.projects);
+  }
+
+  private modifyProject(project: Project) {
+    const idx = ProjectService.projects.findIndex(p => p.id === project.id);
+    ProjectService.projects[idx] = project;
+    ProjectService.projects$.next(ProjectService.projects);
+  }
+
+  private removeProject(id: string) {
+    ProjectService.projects = ProjectService.projects.filter(p => p.id !== id);
+    ProjectService.projects$.next(ProjectService.projects);
+  }
 
   createProject(data: {name: string, description: string, envtype: string}) {
     return this.http.post('/project/v1/project/', data).pipe(map(res => {
       try {
-        return new ResponseCollector(res);
+        const collector = new ResponseCollector(res);
+        if (collector.success()) {
+          this.appendProject(collector.data()['project']);
+        }
+        return collector;
       } catch(e) {
         return ResponseCollector.localErrorResponse();
       }
@@ -23,7 +51,11 @@ export class ProjectService {
   listProject() {
     return this.http.get('/project/v1/project/').pipe(map(res => {
       try {
-        return new ResponseCollector(res);
+        const collector = new ResponseCollector(res);
+        if (collector.success()) {
+          this.loadProjects(collector.data()['projects']);
+        }
+        return collector;
       } catch(e) {
         return ResponseCollector.localErrorResponse();
       }
@@ -33,7 +65,11 @@ export class ProjectService {
   updateProject(id: string, data: {description: string, envtype: string}) {
     return this.http.put(`/project/v1/project/?id=${id}`, data).pipe(map(res => {
       try {
-        return new ResponseCollector(res);
+        const collector = new ResponseCollector(res);
+        if (collector.success()) {
+          this.modifyProject(collector.data()['project']);
+        }
+        return collector;
       } catch(e) {
         return ResponseCollector.localErrorResponse();
       }
@@ -43,7 +79,11 @@ export class ProjectService {
   deleteProject(id: string) {
     return this.http.delete(`/project/v1/project/?id=${id}`).pipe(map(res => {
       try {
-        return new ResponseCollector(res);
+        const collector = new ResponseCollector(res);
+        if (collector.success()) {
+          this.removeProject(id);
+        }
+        return collector;
       } catch(e) {
         return ResponseCollector.localErrorResponse();
       }

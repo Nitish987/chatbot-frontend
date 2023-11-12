@@ -2,19 +2,25 @@
     <h3>Create Project</h3>
 
     <div class="container-fluid mt-3 p-5 border rounded">
+        <div *ngIf="error !== null" class="alert alert-danger">
+            <strong>Oops!</strong> {{error}}
+        </div>
         <form [formGroup]="projectFrom" (ngSubmit)="onSubmit()">
             <div class="mb-3">
                 <label for="projectName" class="form-label">Project Name</label>
                 <input type="text" class="form-control" id="projectName" formControlName="name"
                     aria-describedby="nameCounter" required #name>
-                <div id="nameCounter" class="form-text d-flex justify-content-end {{name.value.length > 20 ? 'text-danger': ''}}">
-                    {{name.value.length > 20 ? "Name Length Exceeded!": ""}} {{name.value.length}}/20
+                <div id="nameCounter" class="form-text d-flex justify-content-end {{name.value.length > 50 ? 'text-danger': ''}}">
+                    {{name.value.length > 50 ? "Name Length Exceeded!": ""}} {{name.value.length}}/50
                 </div>
             </div>
             <div class="mb-3">
                 <label for="projectDescription" class="form-label">Project Description</label>
                 <textarea class="form-control" id="projectDescription" rows="3" style="resize: none;"
-                    formControlName="description"></textarea>
+                    formControlName="description" aria-describedby="projectDescriptionCounter" required #description></textarea>
+                <div id="projectDescriptionCounter" class="form-text d-flex justify-content-end {{description.value.length > 200 ? 'text-danger': ''}}">
+                    {{description.value.length > 200 ? "Description Length Exceeded!": ""}} {{description.value.length}}/200
+                </div>
             </div>
             <label class="form-label">Project Environment</label>
             <div class="mb-3 d-flex gap-2 c-envtype-block">
