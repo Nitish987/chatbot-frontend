@@ -18,5 +18,7 @@ export class ProjectApisComponent {
     });
   }
 
-  
+  openCreateApiDialog() {
+    document.getElementById('creatProjectApiBtn')?.click();
+  }
 }

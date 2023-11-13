@@ -1,0 +1,33 @@
+<button id="creatProjectApiBtn" class="d-none" data-bs-toggle="modal" data-bs-target="#creatProjectApi">Create API</button>
+<div class="modal fade" id="creatProjectApi" tabindex="-1" aria-labelledby="creatProjectApiLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="creatProjectApiLabel">Create API</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngIf="error !== null" class="alert alert-danger">
+            <strong>Oops!</strong> {{error}}
+          </div>
+          <form *ngIf="products !== null" [formGroup]="apiForm">
+            <div class="mb-3">
+                <label for="selectProduct" class="form-label">Select Product</label>
+                <select class="form-select mb-3" size="{{products.length}}" formControlName="productId" id="selectProduct">
+                    <option *ngFor="let product of products" value="{{product.id}}">{{product.name}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="host" class="form-label">Enter host</label>
+                <input type="text" class="form-control" placeholder="https://www.example.com" formControlName="host" id="host">
+                <small class="text-secondary">Note: In case of many host seperate them with comma. (eg. https://www.example.com, https://api.example.com)</small>
+            </div>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="creatProjectApiCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal" #closeBtn>Close</button>
+          <button type="button" class="btn btn-primary" (click)="createApi(closeBtn)">Create API</button>
+        </div>
+      </div>
+    </div>
+  </div>

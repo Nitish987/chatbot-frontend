@@ -1,4 +1,7 @@
 <div class="d-flex justify-content-end">
-    <button class="btn btn-success">Create API</button>
+    <button class="btn btn-success" (click)="openCreateApiDialog()">
+        <i class="bi bi-plus-lg"></i> Create API
+    </button>
+    <app-create-project-api [project]="project"></app-create-project-api>
 </div>
 
