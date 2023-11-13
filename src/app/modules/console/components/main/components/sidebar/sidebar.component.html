@@ -4,18 +4,21 @@
         <div *ngIf="projectList.length === 0" class="alert alert-info">
             No Projects. <a routerLink="/console/create-project">Create One</a>
         </div>
-        <a *ngFor="let project of projectList" class="list-group-item list-group-item-action" [routerLink]="'/console/project/' + project.id" routerLinkActive="active">
-            <i class="bi bi-code-square"></i> {{project.name}}
-        </a>
+        <div *ngFor="let project of projectList">
+            <a class="list-group-item list-group-item-action rounded border-0"
+                [routerLink]="['/console/project/', project.id]" routerLinkActive="active" (click)="onProjectChanged(project)">
+                <i class="bi bi-code-square"></i> {{project.name}}
+            </a>
+        </div>
     </div>
-    
+
     <h6 class="fw-bold text-break mt-4">Docs</h6>
     <div class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action">
+        <a class="list-group-item list-group-item-action rounded border-0">
             <i class="bi bi-robot"></i>
             <span> Chatbot</span>
         </a>
-        <a class="list-group-item list-group-item-action">
+        <a class="list-group-item list-group-item-action rounded border-0">
             <i class="bi bi-input-cursor-text"></i>
             <span> Embedded Forms</span>
         </a>
@@ -23,8 +26,8 @@
 
     <h6 class="fw-bold text-break mt-4">Others</h6>
     <div class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action" href="/console/settings">
-            <i class="bi bi-gear"></i> 
+        <a class="list-group-item list-group-item-action rounded border-0" routerLink="/console/settings" routerLinkActive="active">
+            <i class="bi bi-gear"></i>
             <span> Settings</span>
         </a>
     </div>

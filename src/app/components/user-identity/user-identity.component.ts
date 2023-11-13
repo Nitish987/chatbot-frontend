@@ -15,7 +15,7 @@ export class UserIdentityComponent {
   error: string | null = null
 
   constructor(private service: UserIdentityService) {
-    this.service.getResponse().subscribe(result => {
+    this.service.getResponse$.subscribe(result => {
       if (!result.isInitiated) {
         this.error = result.message;
       }

@@ -8,7 +8,7 @@ import { ResponseCollector } from 'src/app/utils/response-collector';
   providedIn: 'root'
 })
 export class ProjectService {
-  static projects$ = new BehaviorSubject<Project[]>([]);
+  private static projects$ = new BehaviorSubject<Project[]>([]);
   private static projects: Project[] = [];
 
   constructor(private http: HttpService) { }
@@ -32,6 +32,18 @@ export class ProjectService {
   private removeProject(id: string) {
     ProjectService.projects = ProjectService.projects.filter(p => p.id !== id);
     ProjectService.projects$.next(ProjectService.projects);
+  }
+
+  getProject(id: string) {
+    return ProjectService.projects$.pipe(map(projects => {
+      const project = projects.find(p => p.id === id);
+      if (project === undefined) return null;
+      return project;
+    }));
+  }
+
+  get getProjects$() {
+    return ProjectService.projects$;
   }
 
   createProject(data: {name: string, description: string, envtype: string}) {

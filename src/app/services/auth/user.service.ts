@@ -9,7 +9,7 @@ import { ResponseCollector } from 'src/app/utils/response-collector';
   providedIn: 'root'
 })
 export class UserService {
-  static user$ = new BehaviorSubject<User | null>(null);
+  private static user$ = new BehaviorSubject<User | null>(null);
   private static user: User | null = null;
 
   constructor(private authorization: AuthorizationService, private http: HttpService) { }
@@ -17,6 +17,10 @@ export class UserService {
   private setUser(u: User) {
     UserService.user = u;
     UserService.user$.next(UserService.user);
+  }
+
+  get getUser$() {
+    return UserService.user$;
   }
 
   loadUser() {

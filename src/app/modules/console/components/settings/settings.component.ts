@@ -28,14 +28,14 @@ export class SettingsComponent {
   });
   nameFormMessage: string | null = null;
 
-  constructor(private identityService: UserIdentityService, private settingsService: SettingsService, private router: Router, private authorizationService: AuthorizationService) {
-    this.identityService.getVerified().subscribe(isVerified => {
+  constructor(private identityService: UserIdentityService, private settingsService: SettingsService, private router: Router, private authorizationService: AuthorizationService, private userService: UserService) {
+    this.identityService.getVerified$.subscribe(isVerified => {
       if (isVerified) {
         this.identityService.cancel();
         document.getElementById("emailChangeBtn")?.click();
       }
     });
-    UserService.user$.subscribe(user => {
+    userService.getUser$.subscribe(user => {
       if (user !== null) {
         this.profile = user.profile;
         const fullName = this.profile.name.split(' ');

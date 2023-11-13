@@ -17,7 +17,7 @@ export class UserIdentityService {
     UserIdentityService.response$.next({isInitiated, message});
   }
 
-  getResponse() {
+  get getResponse$() {
     return UserIdentityService.response$;
   }
 
@@ -25,7 +25,7 @@ export class UserIdentityService {
     UserIdentityService.dialogVisibility$.next(visibility);
   }
 
-  getDialogVisibility() {
+  get getDialogVisibility$() {
     return UserIdentityService.dialogVisibility$;
   }
 
@@ -33,7 +33,7 @@ export class UserIdentityService {
     UserIdentityService.isVerified$.next(isVerified);
   }
 
-  getVerified() {
+  get getVerified$() {
     return UserIdentityService.isVerified$;
   }
 
