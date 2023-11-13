@@ -1,0 +1,29 @@
+<div class="c-project">
+    <h3>{{project?.name}}</h3>
+
+    <div *ngIf="project !== null" class="container-fluid mt-3">
+        <div class="project-tabs">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/console/project/', project!.id, 'dashboard']" routerLinkActive="active">
+                        <i class="bi bi-bar-chart-steps"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/console/project/', project!.id, 'apis']" routerLinkActive="active">
+                        <i class="bi bi-pass"></i> API's
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/console/project/', project!.id, 'settings']" routerLinkActive="active">
+                        <i class="bi bi-sliders"></i> Settings
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-2">
+        <router-outlet></router-outlet>
+    </div>
+</div>

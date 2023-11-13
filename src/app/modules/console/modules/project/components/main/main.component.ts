@@ -1,16 +1,15 @@
-import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/project';
-import { ProjectService } from '../../services/project/project.service';
-import { WorkingProjectService } from '../../services/project/working-project.service';
+import { ProjectService } from 'src/app/modules/console/services/project/project.service';
+import { WorkingProjectService } from 'src/app/modules/console/services/project/working-project.service';
 
 @Component({
-  selector: 'app-project',
-  templateUrl: './project.component.html',
-  styleUrls: ['./project.component.css']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css']
 })
-export class ProjectComponent implements OnInit {
-  tabActiveIndex = 0;
+export class MainComponent implements OnInit {
   project: Project | null = null;
 
   constructor(private route: ActivatedRoute, private projectService: ProjectService, private workingProject: WorkingProjectService) {
@@ -28,9 +27,5 @@ export class ProjectComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.workingProject.changeWorkingProject(id);
-  }
-
-  changeTabIndex(idx: number) {
-    this.tabActiveIndex = idx;
   }
 }

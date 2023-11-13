@@ -12,15 +12,15 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-        path: authRoute.login,
+        path: authRoute.childRoute.login,
         component: LoginComponent
       },
       {
-        path: authRoute.signup,
+        path: authRoute.childRoute.signup,
         component: SignupComponent
       },
       {
-        path: authRoute.recovery,
+        path: authRoute.childRoute.recovery,
         component: RecoveryComponent
       }
     ]

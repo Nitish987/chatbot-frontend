@@ -6,9 +6,7 @@ import { MainComponent } from './components/main/main.component';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { NavbarComponent } from './components/main/components/navbar/navbar.component';
 import { SidebarComponent } from './components/main/components/sidebar/sidebar.component';
-import { ProjectComponent } from './components/project/project.component';
 import { SettingsComponent } from './components/settings/settings.component';
-import { BillingComponent } from './components/billing/billing.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfilePicChangeComponent } from './components/settings/components/profile-pic-change/profile-pic-change.component';
 import { EmailChangeComponent } from './components/settings/components/email-change/email-change.component';
@@ -18,9 +16,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from 'src/app/services/auth/user.service';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { ProjectService } from './services/project/project.service';
-import { ProjectDashboardComponent } from './components/project/components/project-dashboard/project-dashboard.component';
-import { ProjectApisComponent } from './components/project/components/project-apis/project-apis.component';
-import { ProjectSettingsComponent } from './components/project/components/project-settings/project-settings.component';
 import { ProductService } from './services/product/product.service';
 
 
@@ -29,16 +24,11 @@ import { ProductService } from './services/product/product.service';
     MainComponent,
     NavbarComponent,
     SidebarComponent,
-    ProjectComponent,
     SettingsComponent,
-    BillingComponent,
     DashboardComponent,
     ProfilePicChangeComponent,
     EmailChangeComponent,
-    CreateProjectComponent,
-    ProjectDashboardComponent,
-    ProjectApisComponent,
-    ProjectSettingsComponent
+    CreateProjectComponent
   ],
   imports: [
     CommonModule,

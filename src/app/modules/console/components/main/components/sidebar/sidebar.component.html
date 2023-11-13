@@ -6,7 +6,7 @@
         </div>
         <div *ngFor="let project of projectList">
             <a class="list-group-item list-group-item-action rounded border-0"
-                [routerLink]="['/console/project/', project.id]" routerLinkActive="active" (click)="onProjectChanged(project)">
+                [routerLink]="['/console/project/', project.id, 'dashboard']" routerLinkActive="active" (click)="onProjectChanged(project)">
                 <i class="bi bi-code-square"></i> {{project.name}}
             </a>
         </div>
