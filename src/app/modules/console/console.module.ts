@@ -18,6 +18,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from 'src/app/services/auth/user.service';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { ProjectService } from './services/project/project.service';
+import { ProjectDashboardComponent } from './components/project/components/project-dashboard/project-dashboard.component';
+import { ProjectApisComponent } from './components/project/components/project-apis/project-apis.component';
+import { ProjectSettingsComponent } from './components/project/components/project-settings/project-settings.component';
+import { ProductService } from './services/product/product.service';
 
 
 @NgModule({
@@ -31,7 +35,10 @@ import { ProjectService } from './services/project/project.service';
     DashboardComponent,
     ProfilePicChangeComponent,
     EmailChangeComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    ProjectDashboardComponent,
+    ProjectApisComponent,
+    ProjectSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +50,8 @@ import { ProjectService } from './services/project/project.service';
     UserIdentityService,
     SettingsService,
     UserService,
-    ProjectService
+    ProjectService,
+    ProductService
   ]
 })
 export class ConsoleModule { }

@@ -29,4 +29,8 @@ export class ProjectComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.workingProject.changeWorkingProject(id);
   }
+
+  changeTabIndex(idx: number) {
+    this.tabActiveIndex = idx;
+  }
 }
