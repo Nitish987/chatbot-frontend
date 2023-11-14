@@ -22,4 +22,14 @@ export class ProjectApiService {
       }
     }));
   }
+
+  listApis(projectId: string) {
+    return this.http.get(`/project/v1/project/${projectId}/project-api/`).pipe(map(res => {
+      try {
+        return new ResponseCollector(res);
+      } catch(e) {
+        return ResponseCollector.localErrorResponse();
+      }
+    }));
+  }
 }

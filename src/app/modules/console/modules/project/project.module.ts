@@ -12,6 +12,8 @@ import { ProjectService } from '../../services/project/project.service';
 import { WorkingProjectService } from '../../services/project/working-project.service';
 import { HttpService } from 'src/app/services/http/http.service';
 import { ProjectApiService } from './services/project-api/project-api.service';
+import { ViewProjectApiComponent } from './components/project-apis/components/view-project-api/view-project-api.component';
+import { DeleteProjectApiComponent } from './components/project-apis/components/delete-project-api/delete-project-api.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { ProjectApiService } from './services/project-api/project-api.service';
     ProjectApisComponent,
     ProjectDashboardComponent,
     ProjectSettingsComponent,
-    CreateProjectApiComponent
+    CreateProjectApiComponent,
+    ViewProjectApiComponent,
+    DeleteProjectApiComponent
   ],
   imports: [
     CommonModule,

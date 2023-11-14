@@ -35,9 +35,8 @@ export class CreateProjectApiComponent {
       this.error = 'Please enter valid host url.';
       return;
     }
-    if (this.apiForm.valid) {
-      console.log(this.project)
-      this.projectApiService.createApi(this.project!.id, this.apiForm.value.productId!, this.apiForm.value.host!).subscribe(res => {
+    if (this.apiForm.valid && this.project) {
+      this.projectApiService.createApi(this.project.id, this.apiForm.value.productId!, this.apiForm.value.host!).subscribe(res => {
         if (res.success()) {
           closeBtn.click();
         } else {

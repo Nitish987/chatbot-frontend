@@ -3,6 +3,11 @@
 }
 
 @media screen and (max-width: 768px) {
+    .c-sidebar h6 {
+        text-align: center;
+        font-size: 10px;
+    }
+    
     .c-sidebar span {
         display: none;
     }

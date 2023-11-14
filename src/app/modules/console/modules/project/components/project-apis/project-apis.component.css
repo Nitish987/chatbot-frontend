@@ -1,0 +1,46 @@
+.c-project-api-table {
+    overflow: auto;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 1000px) {
+    .c-project-api-table {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .c-project-api-table {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .c-project-api-table {
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .c-project-api-table {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .c-project-api-table {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .c-project-api-table {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .c-project-api-table {
+        width: 200px;
+    }
+}
