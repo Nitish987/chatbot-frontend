@@ -8,17 +8,13 @@ import { WorkingProjectService } from 'src/app/modules/console/services/project/
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   projectList: Project[] = [];
 
   constructor(private projectService: ProjectService, private workingProject: WorkingProjectService) {
     projectService.getProjects$.subscribe(projects => {
       this.projectList = projects;
     })
-  }
-
-  ngOnInit(): void {
-    this.projectService.listProject().subscribe(void 0);
   }
 
   onProjectChanged(project: Project) {

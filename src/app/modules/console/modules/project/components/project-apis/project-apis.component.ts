@@ -28,19 +28,18 @@ export class ProjectApisComponent implements OnInit {
         this.projectService.getProject(id).subscribe(project => {
           this.project = project;
         });
-        this.loadPrjectApis(id);
+        this.loadProjectApis(id);
       } else {
         this.project = null;
       }
     });
+    this.projectApiService.getProjectApis$.subscribe(projectApis => {
+      this.projectApis = projectApis;
+    });
   }
 
-  loadPrjectApis(projectId: string) {
-    this.projectApiService.listApis(projectId).subscribe(res => {
-      if (res.success()) {
-        this.projectApis = res.data()['projectapis'];
-      }
-    });
+  loadProjectApis(projectId: string) {
+    this.projectApiService.listApis(projectId).subscribe(void 0);
   }
 
   openCreateApiDialog() {
