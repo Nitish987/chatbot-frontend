@@ -74,7 +74,7 @@ export class ProjectService {
     }));
   }
 
-  updateProject(id: string, data: {description: string, envtype: string}) {
+  updateProject(id: string, data: {name: string, description: string, envtype: string}) {
     return this.http.put(`/project/v1/project/?id=${id}`, data).pipe(map(res => {
       try {
         const collector = new ResponseCollector(res);
