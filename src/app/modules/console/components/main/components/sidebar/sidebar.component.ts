@@ -28,4 +28,8 @@ export class SidebarComponent implements OnInit {
   onProjectChanged(project: Project) {
     this.workingProject.changeWorkingProject(project.id);
   }
+
+  onProjectChangedToNull() {
+    this.workingProject.changeWorkingProject(null);
+  }
 }
