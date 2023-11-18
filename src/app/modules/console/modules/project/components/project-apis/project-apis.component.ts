@@ -51,6 +51,13 @@ export class ProjectApisComponent implements OnInit {
     this.projectApiSelected = projectApi;
     document.getElementById('viewProjectApiBtn')?.click();
   }
+
+  openConfigApiDialog(projectApi: ProjectApi) {
+    this.projectApiSelected = projectApi;
+    if (projectApi.product.name === 'Chatbot') {
+      document.getElementById('configChatbotApiBtn')?.click();
+    }
+  }
   
   openDeleteApiDialog(projectApi: ProjectApi) {
     this.projectApiSelected = projectApi;

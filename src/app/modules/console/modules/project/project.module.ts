@@ -14,6 +14,7 @@ import { HttpService } from 'src/app/services/http/http.service';
 import { ProjectApiService } from './services/project-api/project-api.service';
 import { ViewProjectApiComponent } from './components/project-apis/components/view-project-api/view-project-api.component';
 import { DeleteProjectApiComponent } from './components/project-apis/components/delete-project-api/delete-project-api.component';
+import { ConfigChatbotApiComponent } from './components/project-apis/components/config-chatbot-api/config-chatbot-api.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { DeleteProjectApiComponent } from './components/project-apis/components/
     ProjectSettingsComponent,
     CreateProjectApiComponent,
     ViewProjectApiComponent,
-    DeleteProjectApiComponent
+    DeleteProjectApiComponent,
+    ConfigChatbotApiComponent
   ],
   imports: [
     CommonModule,
