@@ -1,10 +1,9 @@
-import { Product } from "./product";
 import { Project } from "./project";
 
 export interface ProjectApi {
     id: number;
     project: Project;
-    product: Product;
+    product: string;
     apikey: string;
     createdon: string;
 }

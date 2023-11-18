@@ -1,11 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product';
+import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/project';
-import { ProductService } from 'src/app/modules/console/services/product/product.service';
 import { ProjectService } from 'src/app/modules/console/services/project/project.service';
 import { WorkingProjectService } from 'src/app/modules/console/services/project/working-project.service';
 import { ProjectApiService } from '../../services/project-api/project-api.service';
 import { ProjectApi } from 'src/app/models/project-apis';
+import { Product } from 'src/app/constants/products';
 
 @Component({
   selector: 'app-project-apis',
@@ -14,16 +13,12 @@ import { ProjectApi } from 'src/app/models/project-apis';
 })
 export class ProjectApisComponent implements OnInit {
   project: Project | null = null;
-  products: Product[] = [];
   projectApis: ProjectApi[] = [];
   projectApiSelected: ProjectApi | null = null;
 
-  constructor(private productService: ProductService, private projectService: ProjectService, private workingProjectService: WorkingProjectService, private projectApiService: ProjectApiService) { }
+  constructor(private projectService: ProjectService, private workingProjectService: WorkingProjectService, private projectApiService: ProjectApiService) { }
 
   ngOnInit(): void {
-    this.productService.getProducts$.subscribe(products => {
-      this.products = products;
-    });
     this.workingProjectService.getWorkingProjectId$.subscribe(id => {
       if (id !== null) {
         this.projectService.getProject(id).subscribe(project => {
@@ -54,7 +49,7 @@ export class ProjectApisComponent implements OnInit {
 
   openConfigApiDialog(projectApi: ProjectApi) {
     this.projectApiSelected = projectApi;
-    if (projectApi.product.name === 'Chatbot') {
+    if (projectApi.product === Product.CHATBOT) {
       document.getElementById('configChatbotApiBtn')?.click();
     }
   }

@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/modules/console/services/product/product.service';
 import { ProjectApiService } from '../../../../services/project-api/project-api.service';
 import { Project } from 'src/app/models/project';
+import { Product } from 'src/app/constants/products';
 
 @Component({
   selector: 'app-create-project-api',
@@ -13,21 +12,17 @@ import { Project } from 'src/app/models/project';
 export class CreateProjectApiComponent {
   @Input() project: Project | null = null;
   apiForm = new FormGroup({
-    productId: new FormControl(0, [Validators.required]),
+    product: new FormControl('', [Validators.required]),
     host: new FormControl('', [Validators.required]),
   });
   error: string | null = null;
-  products: Product[] = []
+  products = Product.products();
 
-  constructor(private productService: ProductService, private projectApiService: ProjectApiService) {
-    productService.getProducts$.subscribe(products => {
-      this.products = products;
-    });
-  }
+  constructor(private projectApiService: ProjectApiService) {}
 
   createApi(closeBtn: HTMLButtonElement) {
     this.error = null;
-    if (this.apiForm.value.productId === 0) {
+    if (this.apiForm.value.product === '') {
       this.error = 'Please Select the product you want to use.';
       return;
     }
@@ -36,7 +31,7 @@ export class CreateProjectApiComponent {
       return;
     }
     if (this.apiForm.valid && this.project) {
-      this.projectApiService.createApi(this.project.id, this.apiForm.value.productId!, this.apiForm.value.host!).subscribe(res => {
+      this.projectApiService.createApi(this.project.id, this.apiForm.value.product!, this.apiForm.value.host!).subscribe(res => {
         if (res.success()) {
           closeBtn.click();
           this.apiForm.reset();

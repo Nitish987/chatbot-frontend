@@ -16,7 +16,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from 'src/app/services/auth/user.service';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { ProjectService } from './services/project/project.service';
-import { ProductService } from './services/product/product.service';
 
 
 @NgModule({
@@ -40,8 +39,7 @@ import { ProductService } from './services/product/product.service';
     UserIdentityService,
     SettingsService,
     UserService,
-    ProjectService,
-    ProductService
+    ProjectService
   ]
 })
 export class ConsoleModule { }
