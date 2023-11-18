@@ -17,6 +17,7 @@ export class ProjectSettingsComponent implements OnInit {
     envtype: new FormControl('DEVELOPMENT', [Validators.required])
   });
   error: string | null = null;
+  success: string | null = null;
 
   constructor(private projectService: ProjectService, private workingProjectService: WorkingProjectService) { }
 
@@ -41,6 +42,7 @@ export class ProjectSettingsComponent implements OnInit {
 
   onSubmit() {
     this.error = null;
+    this.success = null;
     if (!this.projectFrom.controls.name.valid) {
       this.error = 'Name must have atleast 5 character and max to 50 characters.';
       return;
@@ -56,7 +58,7 @@ export class ProjectSettingsComponent implements OnInit {
         envtype: this.projectFrom.value.envtype!
       }).subscribe(res => {
         if (res.success()) {
-          console.log('done');
+          this.success = 'Project Settings Updated.';
         } else {
           this.error = res.error();
         }

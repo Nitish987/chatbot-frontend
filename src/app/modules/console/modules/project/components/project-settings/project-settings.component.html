@@ -3,6 +3,9 @@
         <div *ngIf="error !== null" class="alert alert-danger">
             <strong>Oops!</strong> {{error}}
         </div>
+        <div *ngIf="success !== null" class="alert alert-success">
+            <strong>Done!</strong> {{success}}
+        </div>
         <form [formGroup]="projectFrom" (ngSubmit)="onSubmit()">
             <div class="mb-3">
                 <label for="projectName" class="form-label">Project Name</label>
