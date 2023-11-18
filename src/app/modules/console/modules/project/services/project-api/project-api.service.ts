@@ -63,6 +63,16 @@ export class ProjectApiService {
     }));
   }
 
+  viewApi(projectId: string, projectApiId: number) {
+    return this.http.get(`/project/v1/project/${projectId}/project-api/view/?id=${projectApiId}`).pipe(map(res => {
+      try {
+        return new ResponseCollector(res);
+      } catch(e) {
+        return ResponseCollector.localErrorResponse();
+      }
+    }));
+  }
+
   deleteApi(projectId: string, projectApiId: number) {
     return this.http.delete(`/project/v1/project/${projectId}/project-api/?id=${projectApiId}`).pipe(map(res => {
       try {

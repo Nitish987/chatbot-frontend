@@ -1,1 +1,33 @@
-<p>delete-project-api works!</p>
+<button id="deleteProjectApiBtn" class="d-none" data-bs-toggle="modal" data-bs-target="#deleteProjectApi">Delete API</button>
+<div class="modal fade" id="deleteProjectApi" tabindex="-1" aria-labelledby="deleteProjectApiLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteProjectApiLabel">Delete API</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h6>Are you sure, you want to delete this api ?</h6>
+          <div class="alert alert-danger">
+            <h6>API to be deleted from</h6>
+            <ul>
+              <li>Project - {{projectApi?.project?.name}}</li>
+              <li>Product - {{projectApi?.product?.name}}</li>
+            </ul>
+          </div>
+          <div class="alert alert-info">
+            <h6>Points to Remember</h6>
+            <ul>
+                <li>Once the api is delete will not be recovered in future.</li>
+                <li>Api will not work anymore.</li>
+                <li>Billing for this api will be stopped.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="deleteProjectApiCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal" #closeBtn>Close</button>
+          <button type="button" class="btn btn-danger" (click)="deleteApi(closeBtn)">Delete API</button>
+        </div>
+      </div>
+    </div>
+  </div>

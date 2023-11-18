@@ -39,6 +39,7 @@ export class CreateProjectApiComponent {
       this.projectApiService.createApi(this.project.id, this.apiForm.value.productId!, this.apiForm.value.host!).subscribe(res => {
         if (res.success()) {
           closeBtn.click();
+          this.apiForm.reset();
         } else {
           this.error = res.error();
         }

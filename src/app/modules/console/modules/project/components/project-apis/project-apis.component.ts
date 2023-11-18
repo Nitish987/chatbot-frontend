@@ -16,6 +16,7 @@ export class ProjectApisComponent implements OnInit {
   project: Project | null = null;
   products: Product[] = [];
   projectApis: ProjectApi[] = [];
+  projectApiSelected: ProjectApi | null = null;
 
   constructor(private productService: ProductService, private projectService: ProjectService, private workingProjectService: WorkingProjectService, private projectApiService: ProjectApiService) { }
 
@@ -44,5 +45,15 @@ export class ProjectApisComponent implements OnInit {
 
   openCreateApiDialog() {
     document.getElementById('creatProjectApiBtn')?.click();
+  }
+  
+  openViewApiDialog(projectApi: ProjectApi) {
+    this.projectApiSelected = projectApi;
+    document.getElementById('viewProjectApiBtn')?.click();
+  }
+  
+  openDeleteApiDialog(projectApi: ProjectApi) {
+    this.projectApiSelected = projectApi;
+    document.getElementById('deleteProjectApiBtn')?.click();
   }
 }

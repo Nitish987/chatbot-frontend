@@ -1,1 +1,35 @@
-<p>view-project-api works!</p>
+<button id="viewProjectApiBtn" class="d-none" data-bs-toggle="modal" data-bs-target="#viewProjectApi">View API</button>
+<div class="modal fade" id="viewProjectApi" tabindex="-1" aria-labelledby="viewProjectApiLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="viewProjectApiLabel">API</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h6>Your API Credentials</h6>
+          <div class="border p-3 rounded">
+            <h6>API Details</h6>
+            <ul>
+              <li>Project - {{projectApi?.project?.name}}</li>
+              <li>Product - {{projectApi?.product?.name}}</li>
+            </ul>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="API KEY" aria-label="Api Key" aria-describedby="api-key-copy" value="C_XX....XXXX....XXXX" disabled>
+              <button class="btn btn-outline-success" type="button" id="api-key-copy" (click)="copyApiKey()">
+                <i *ngIf="!isCopied" class="bi bi-clipboard"></i>
+                <i *ngIf="isCopied" class="bi bi-clipboard-check-fill"></i>
+              </button>
+            </div>
+          </div>
+          <div class="alert alert-warning mt-3">
+            <strong>Note:</strong> Please, do note share your API Credentials to anyone.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="viewProjectApiCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal" #closeBtn>Close</button>
+          <button type="button" class="btn btn-primary" (click)="viewApi(closeBtn)">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
