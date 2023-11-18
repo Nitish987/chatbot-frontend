@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./config-chatbot-api.component.css']
 })
 export class ConfigChatbotApiComponent {
-
+  
 }
