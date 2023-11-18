@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/project';
 import { ProjectService } from 'src/app/modules/console/services/project/project.service';
 import { WorkingProjectService } from 'src/app/modules/console/services/project/working-project.service';
+import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 
 @Component({
   selector: 'app-main',
@@ -12,7 +13,7 @@ import { WorkingProjectService } from 'src/app/modules/console/services/project/
 export class MainComponent implements OnInit {
   project: Project | null = null;
 
-  constructor(private route: ActivatedRoute, private projectService: ProjectService, private workingProject: WorkingProjectService) {
+  constructor(private route: ActivatedRoute, private projectService: ProjectService, private workingProject: WorkingProjectService, private authorizationService: AuthorizationService) {
     workingProject.getWorkingProjectId$.subscribe(id => {
       if (id !== null) {
         this.projectService.getProject(id).subscribe(project => {
@@ -25,7 +26,11 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id')!;
-    this.workingProject.changeWorkingProject(id);
+    this.authorizationService.canLoadData$.subscribe(canLoad => {
+      if (canLoad) {
+        const id = this.route.snapshot.paramMap.get('id')!;
+        this.workingProject.changeWorkingProject(id);
+      }
+    });
   }
 }

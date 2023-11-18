@@ -35,7 +35,7 @@ export class CreateProjectComponent {
         envtype: this.projectFrom.value.envtype!
       }).subscribe(res => {
         if (res.success()) {
-          this.router.navigateByUrl(`/console/project/${res.data()['project']['id']}`);
+          this.router.navigateByUrl(`/console/project/${res.data()['project']['id']}/dashboard`);
         } else {
           this.error = res.error();
         }
