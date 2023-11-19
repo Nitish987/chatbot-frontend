@@ -1,37 +1,74 @@
-<button id="creatProjectApiBtn" class="d-none" data-bs-toggle="modal" data-bs-target="#creatProjectApi">Create
-  API</button>
+<button id="creatProjectApiBtn" class="d-none" data-bs-toggle="modal" data-bs-target="#creatProjectApi">
+    Create API
+</button>
 <div class="modal fade" id="creatProjectApi" tabindex="-1" aria-labelledby="creatProjectApiLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="creatProjectApiLabel">Create API</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div *ngIf="error !== null" class="alert alert-danger">
-          <strong>Oops!</strong> {{error}}
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="creatProjectApiLabel">Create API</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetForm()"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="error !== null" class="alert alert-danger">
+                    <strong>Oops!</strong> {{error}}
+                </div>
+                <form *ngIf="products !== null" [formGroup]="apiForm">
+                    <div class="mb-3">
+                        <label for="selectProduct" class="form-label">Select Product</label>
+                        <select class="form-select mb-3" size="{{products.length}}" formControlName="product"
+                            id="selectProduct" (change)="onProductChange()" #selectedProduct>
+                            <option *ngFor="let product of products" value="{{product.name}}">
+                                {{product.name}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div *ngIf="selectedProduct.value === product.chatbot.name" class="mb-3">
+                        <label for="selectProduct" class="form-label">Select Product Type</label>
+                        <div class="d-flex gap-2">
+                            <div *ngFor="let type of product.chatbot.types" class="p-3 border rounded">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="type" id="{{type}}" value="{{type}}" formControlName="type"/>
+                                    <label class="form-check-label" for="{{type}}">
+                                        {{product.chatbot.typesDesc[type]}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="selectedProduct.value === product.emforms.name" class="mb-3">
+                        <label for="selectProduct" class="form-label">Select Product Type</label>
+                        <div class="d-flex gap-2">
+                            <div *ngFor="let type of product.emforms.types" class="p-3 border rounded">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="type" id="{{type}}" value="{{type}}" formControlName="type"/>
+                                    <label class="form-check-label" for="{{type}}">
+                                        {{product.emforms.typesDesc[type]}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="host" class="form-label">Enter host</label>
+                        <input type="text" class="form-control" placeholder="https://www.example.com"
+                            formControlName="host" id="host" />
+                        <small class="text-secondary">Note: In case of many host seperate them with comma. (eg.
+                            https://www.example.com, https://api.example.com)</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="creatProjectApiCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal"
+                    #closeBtn (click)="resetForm()">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" (click)="createApi(closeBtn)">
+                    Create API
+                </button>
+            </div>
         </div>
-        <form *ngIf="products !== null" [formGroup]="apiForm">
-          <div class="mb-3">
-            <label for="selectProduct" class="form-label">Select Product</label>
-            <select class="form-select mb-3" size="{{products.length}}" formControlName="product" id="selectProduct">
-              <option *ngFor="let product of products" value="{{product}}">{{product}}</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="host" class="form-label">Enter host</label>
-            <input type="text" class="form-control" placeholder="https://www.example.com" formControlName="host"
-              id="host">
-            <small class="text-secondary">Note: In case of many host seperate them with comma. (eg.
-              https://www.example.com, https://api.example.com)</small>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="creatProjectApiCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal"
-          #closeBtn>Close</button>
-        <button type="button" class="btn btn-primary" (click)="createApi(closeBtn)">Create API</button>
-      </div>
     </div>
-  </div>
 </div>

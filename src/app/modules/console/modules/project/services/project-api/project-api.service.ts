@@ -32,9 +32,10 @@ export class ProjectApiService {
     this.projectApiList$.next(this.projectApiList);
   }
 
-  createApi(projectId: string, product: string, host: string) {
+  createApi(projectId: string, product: string, type: string, host: string) {
     return this.http.post(`/project/v1/project/${projectId}/project-api/`, {
       product: product,
+      type: type,
       host: host
     }).pipe(map(res => {
       try {

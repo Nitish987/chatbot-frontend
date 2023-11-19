@@ -49,7 +49,7 @@ export class ProjectApisComponent implements OnInit {
 
   openConfigApiDialog(projectApi: ProjectApi) {
     this.projectApiSelected = projectApi;
-    if (projectApi.product === Product.CHATBOT) {
+    if (projectApi.product === Product.chatbot.name) {
       document.getElementById('configChatbotApiBtn')?.click();
     }
   }
