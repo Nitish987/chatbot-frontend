@@ -33,7 +33,7 @@ export class ProjectApiService {
   }
 
   createApi(projectId: string, product: string, type: string, host: string) {
-    return this.http.post(`/project/v1/project/${projectId}/project-api/`, {
+    return this.http.post(`/apis/v1/project-api/${projectId}/`, {
       product: product,
       type: type,
       host: host
@@ -51,7 +51,7 @@ export class ProjectApiService {
   }
 
   listApis(projectId: string) {
-    return this.http.get(`/project/v1/project/${projectId}/project-api/`).pipe(map(res => {
+    return this.http.get(`/apis/v1/project-api/${projectId}/`).pipe(map(res => {
       try {
         const collector = new ResponseCollector(res);
         if (collector.success()) {
@@ -65,7 +65,7 @@ export class ProjectApiService {
   }
 
   viewApi(projectId: string, projectApiId: number) {
-    return this.http.get(`/project/v1/project/${projectId}/project-api/view/?id=${projectApiId}`).pipe(map(res => {
+    return this.http.get(`/apis/v1/project-api/${projectId}/view/?id=${projectApiId}`).pipe(map(res => {
       try {
         return new ResponseCollector(res);
       } catch(e) {
@@ -75,7 +75,7 @@ export class ProjectApiService {
   }
 
   deleteApi(projectId: string, projectApiId: number) {
-    return this.http.delete(`/project/v1/project/${projectId}/project-api/?id=${projectApiId}`).pipe(map(res => {
+    return this.http.delete(`/apis/v1/project-api/${projectId}/?id=${projectApiId}`).pipe(map(res => {
       try {
         const collector = new ResponseCollector(res);
         if (collector.success()) {

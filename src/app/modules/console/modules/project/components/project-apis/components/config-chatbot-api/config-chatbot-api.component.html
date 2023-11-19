@@ -6,38 +6,33 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="configChatbotApiLabel">
-                    API Configuration
+                    API Configuration | {{projectApi?.product}} - {{projectApi?.type}}
                 </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetQnaForm()"></button>
             </div>
             <div class="modal-body">
 
-                <form class="d-flex gap-2">
-                    <div class="p-3 border rounded">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="envtype" id="qna" value="QA" checked />
-                            <label class="form-check-label" for="qna">
-                                <i class="bi bi-chat-quote"></i>
-                                QnA (Question & Answers)
-                            </label>
+                <div *ngIf="projectApi && projectApi.type === product.chatbot.types[0]">
+                    <form *ngFor="let form of qnaForms; let i = index" class="mb-3" [formGroup]="form">
+                        <div class="d-flex justify-content-between">
+                            <label for="question-{{i}}" class="form-label">Question {{i + 1}}.</label>
+                            <button class="btn btn-link btn-sm text-danger" (click)="removeQuestion(i)"><i class="bi bi-dash-lg"></i></button>
                         </div>
+                        <input type="text" class="form-control border-dark" id="question-{{i}}" placeholder="Question to be listed on chatbot" formControlName="question">
+                        <textarea class="form-control border-primary mt-2" id="answer-{{i}}" placeholder="Answer to be given by chatbot" rows="1" formControlName="answer"></textarea>
+                    </form>
+                    <div class="mt-3">
+                        <button class="btn btn-primary" (click)="addQuestion()"><i class="bi bi-plus-lg"></i> Add Question</button>
                     </div>
-                    <div class="p-3 border rounded">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="envtype" id="chatgpt" value="AI" />
-                            <label class="form-check-label" for="chatgpt">
-                                <i class="bi bi-robot"></i>
-                                AI (ChatGPT)
-                            </label>
-                        </div>
-                    </div>
-                </form>
+                </div>
 
-                
+                <div *ngIf="projectApi && projectApi.type === product.chatbot.types[1]">
+
+                </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" id="configChatbotApiCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal"
+                <button type="button" id="configChatbotApiCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetQnaForm()"
                     #closeBtn>
                     Close
                 </button>
