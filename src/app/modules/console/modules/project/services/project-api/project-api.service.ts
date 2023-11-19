@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { ProjectApi } from 'src/app/models/project-apis';
+import { Api } from 'src/app/models/api';
 import { HttpService } from 'src/app/services/http/http.service';
 import { ResponseCollector } from 'src/app/utils/response-collector';
 
@@ -8,8 +8,8 @@ import { ResponseCollector } from 'src/app/utils/response-collector';
   providedIn: 'root'
 })
 export class ProjectApiService {
-  private projectApiList$ = new BehaviorSubject<ProjectApi[]>([]);
-  private projectApiList: ProjectApi[] = [];
+  private projectApiList$ = new BehaviorSubject<Api[]>([]);
+  private projectApiList: Api[] = [];
 
   constructor(private http: HttpService) { }
 
@@ -17,12 +17,12 @@ export class ProjectApiService {
     return this.projectApiList$;
   }
 
-  private setProjectApis(projectApis: ProjectApi[]) {
+  private setProjectApis(projectApis: Api[]) {
     this.projectApiList = projectApis;
     this.projectApiList$.next(this.projectApiList);
   }
 
-  private appendProjectApi(projectApi: ProjectApi) {
+  private appendProjectApi(projectApi: Api) {
     this.projectApiList.push(projectApi);
     this.projectApiList$.next(this.projectApiList);
   }

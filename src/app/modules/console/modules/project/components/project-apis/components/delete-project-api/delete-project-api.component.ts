@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProjectApi } from 'src/app/models/project-apis';
+import { Api } from 'src/app/models/api';
 import { ProjectApiService } from '../../../../services/project-api/project-api.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ProjectApiService } from '../../../../services/project-api/project-api.
   styleUrls: ['./delete-project-api.component.css']
 })
 export class DeleteProjectApiComponent {
-  @Input() projectApi: ProjectApi | null = null;
+  @Input() projectApi: Api | null = null;
 
   constructor(private projectApiService: ProjectApiService) {}
 

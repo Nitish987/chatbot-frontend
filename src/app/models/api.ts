@@ -1,6 +1,6 @@
 import { Project } from "./project";
 
-export interface ProjectApi {
+export interface Api {
     id: number;
     project: Project;
     product: string;

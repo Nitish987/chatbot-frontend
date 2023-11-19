@@ -3,7 +3,7 @@ import { Project } from 'src/app/models/project';
 import { ProjectService } from 'src/app/modules/console/services/project/project.service';
 import { WorkingProjectService } from 'src/app/modules/console/services/project/working-project.service';
 import { ProjectApiService } from '../../services/project-api/project-api.service';
-import { ProjectApi } from 'src/app/models/project-apis';
+import { Api } from 'src/app/models/api';
 import { Product } from 'src/app/constants/products';
 
 @Component({
@@ -13,8 +13,8 @@ import { Product } from 'src/app/constants/products';
 })
 export class ProjectApisComponent implements OnInit {
   project: Project | null = null;
-  projectApis: ProjectApi[] = [];
-  projectApiSelected: ProjectApi | null = null;
+  projectApis: Api[] = [];
+  projectApiSelected: Api | null = null;
 
   constructor(private projectService: ProjectService, private workingProjectService: WorkingProjectService, private projectApiService: ProjectApiService) { }
 
@@ -42,19 +42,19 @@ export class ProjectApisComponent implements OnInit {
     document.getElementById('creatProjectApiBtn')?.click();
   }
   
-  openViewApiDialog(projectApi: ProjectApi) {
+  openViewApiDialog(projectApi: Api) {
     this.projectApiSelected = projectApi;
     document.getElementById('viewProjectApiBtn')?.click();
   }
 
-  openConfigApiDialog(projectApi: ProjectApi) {
+  openConfigApiDialog(projectApi: Api) {
     this.projectApiSelected = projectApi;
     if (projectApi.product === Product.chatbot.name) {
       document.getElementById('configChatbotApiBtn')?.click();
     }
   }
   
-  openDeleteApiDialog(projectApi: ProjectApi) {
+  openDeleteApiDialog(projectApi: Api) {
     this.projectApiSelected = projectApi;
     document.getElementById('deleteProjectApiBtn')?.click();
   }

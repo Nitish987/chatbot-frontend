@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProjectApi } from 'src/app/models/project-apis';
+import { Api } from 'src/app/models/api';
 import { ProjectApiService } from '../../../../services/project-api/project-api.service';
 import { Product } from 'src/app/constants/products';
 
@@ -9,7 +9,7 @@ import { Product } from 'src/app/constants/products';
   styleUrls: ['./view-project-api.component.css'],
 })
 export class ViewProjectApiComponent {
-  @Input() projectApi: ProjectApi | null = null;
+  @Input() projectApi: Api | null = null;
   isCopied: boolean = false;
   productTypes = Product.productTypes;
 
