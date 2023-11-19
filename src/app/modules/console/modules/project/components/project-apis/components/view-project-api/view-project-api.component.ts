@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ProjectApi } from 'src/app/models/project-apis';
 import { ProjectApiService } from '../../../../services/project-api/project-api.service';
+import { Product } from 'src/app/constants/products';
 
 @Component({
   selector: 'app-view-project-api',
@@ -10,6 +11,7 @@ import { ProjectApiService } from '../../../../services/project-api/project-api.
 export class ViewProjectApiComponent {
   @Input() projectApi: ProjectApi | null = null;
   isCopied: boolean = false;
+  productTypes = Product.productTypes;
 
   constructor(private projectApiService: ProjectApiService) {}
 

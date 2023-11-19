@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProjectApiService } from '../../../../services/project-api/project-api.service';
 import { Project } from 'src/app/models/project';
@@ -49,14 +49,16 @@ export class CreateProjectApiComponent {
   }
 
   onProductChange() {
+    this.error = null;
     this.apiForm.controls.type.setValue('');
   }
 
   resetForm() {
+    this.error = null;
     this.apiForm.setValue({
       product: '',
       type: '',
       host: ''
-    })
+    });
   }
 }

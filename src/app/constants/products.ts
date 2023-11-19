@@ -26,4 +26,5 @@ export class Product {
   static chatbot: ProductItem = Chatbot;
   static emforms: ProductItem = Emforms;
   static products: ProductItem[] = [Chatbot, Emforms];
+  static productTypes: {[type: string]: string} = {...Chatbot.typesDesc, ...Emforms.typesDesc};
 }
