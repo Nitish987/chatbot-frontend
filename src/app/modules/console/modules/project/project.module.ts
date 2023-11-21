@@ -15,6 +15,7 @@ import { ProjectApiService } from './services/project-api/project-api.service';
 import { ViewProjectApiComponent } from './components/project-apis/components/view-project-api/view-project-api.component';
 import { DeleteProjectApiComponent } from './components/project-apis/components/delete-project-api/delete-project-api.component';
 import { ConfigChatbotApiComponent } from './components/project-apis/components/config-chatbot-api/config-chatbot-api.component';
+import { ChatbotService } from './services/chatbot/chatbot.service';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ConfigChatbotApiComponent } from './components/project-apis/components/
     ProjectService,
     WorkingProjectService,
     HttpService,
-    ProjectApiService
+    ProjectApiService,
+    ChatbotService
   ]
 })
 export class ProjectModule { }

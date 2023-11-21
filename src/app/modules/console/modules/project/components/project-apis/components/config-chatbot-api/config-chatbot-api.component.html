@@ -11,6 +11,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetQnaForm()"></button>
             </div>
             <div class="modal-body">
+                
+                <div *ngIf="error !== null" class="alert alert-danger">
+                    <strong>Oops!</strong> {{error}}
+                </div>
 
                 <div *ngIf="projectApi && projectApi.type === product.chatbot.types[0]">
                     <form *ngFor="let form of qnaForms; let i = index" class="mb-3" [formGroup]="form">
@@ -36,7 +40,7 @@
                     #closeBtn>
                     Close
                 </button>
-                <button type="button" class="btn btn-primary">Update Config</button>
+                <button type="button" class="btn btn-primary" (click)="commitConfig()">Update Config</button>
             </div>
         </div>
     </div>
