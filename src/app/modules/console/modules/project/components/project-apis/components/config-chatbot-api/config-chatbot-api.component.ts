@@ -21,22 +21,28 @@ export class ConfigChatbotApiComponent implements OnInit {
     this.addQuestion();
   }
 
-  commitConfig() {
+  commitConfig(closeBtn: HTMLButtonElement) {
     this.error = null;
-    if (this.qnaForms.map(f => f.controls['question'].value === '' && f.controls['answer'].value === '' ).includes(true)) {
-      this.error = 'Please, provide value for each QnA.'
-      return;
-    }
-    const configuration = this.qnaForms.map(f => ({question: f.value.question, answer: f.value.answer}));
-    this.chatbotService.setConfig({
-      apiId: this.projectApi!.id,
-      config: { qna: configuration },
-      data: {}
-    }).subscribe(res => {
-      if (res.success()) {
-        console.log('API configured.');
+    if (this.projectApi && this.projectApi.type === this.product.chatbot.types[0]) {
+      if (this.qnaForms.map(f => f.controls['question'].value === '' && f.controls['answer'].value === '' ).includes(true)) {
+        this.error = 'Please, provide value for each QnA.'
+        return;
       }
-    });
+      const configuration = this.qnaForms.map(f => ({question: f.value.question, answer: f.value.answer}));
+      this.chatbotService.setConfig({
+        apiId: this.projectApi!.id,
+        config: { qna: configuration },
+        data: {}
+      }).subscribe(res => {
+        if (res.success()) {
+          closeBtn.click();
+        } else {
+          this.error = res.error();
+        }
+      });
+    } else if (this.projectApi && this.projectApi.type === this.product.chatbot.types[1]) {
+      
+    }
   }
   
   addQuestion() {

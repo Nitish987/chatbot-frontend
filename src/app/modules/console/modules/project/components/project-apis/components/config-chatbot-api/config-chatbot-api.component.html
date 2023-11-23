@@ -31,7 +31,7 @@
                 </div>
 
                 <div *ngIf="projectApi && projectApi.type === product.chatbot.types[1]">
-
+                    
                 </div>
 
             </div>
@@ -40,7 +40,7 @@
                     #closeBtn>
                     Close
                 </button>
-                <button type="button" class="btn btn-primary" (click)="commitConfig()">Update Config</button>
+                <button type="button" class="btn btn-primary" (click)="commitConfig(closeBtn)">Update Config</button>
             </div>
         </div>
     </div>
