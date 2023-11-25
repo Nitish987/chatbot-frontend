@@ -1,47 +1,62 @@
-<button id="configChatbotApiBtn" class="d-none" data-bs-toggle="modal" data-bs-target="#configChatbotApi">
-    Config API
-</button>
-<div class="modal fade" id="configChatbotApi" tabindex="-1" aria-labelledby="configChatbotApiLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="configChatbotApiLabel">
-                    API Configuration | {{projectApi?.product}} - {{projectApi?.type}}
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetQnaForm()"></button>
-            </div>
-            <div class="modal-body">
-                
-                <div *ngIf="error !== null" class="alert alert-danger">
-                    <strong>Oops!</strong> {{error}}
-                </div>
+<div class="mt-3">    
+    <div *ngIf="error !== null" class="alert alert-danger">
+        <strong>Oops!</strong> {{error}}
+    </div>
 
-                <div *ngIf="projectApi && projectApi.type === product.chatbot.types[0]">
-                    <form *ngFor="let form of qnaForms; let i = index" class="mb-3" [formGroup]="form">
-                        <div class="d-flex justify-content-between">
-                            <label for="question-{{i}}" class="form-label">Question {{i + 1}}.</label>
-                            <button class="btn btn-link btn-sm text-danger" (click)="removeQuestion(i)"><i class="bi bi-dash-lg"></i></button>
-                        </div>
-                        <input type="text" class="form-control border-dark" id="question-{{i}}" placeholder="Question to be listed on chatbot" formControlName="question">
-                        <textarea class="form-control border-primary mt-2" id="answer-{{i}}" placeholder="Answer to be given by chatbot" rows="1" formControlName="answer"></textarea>
-                    </form>
-                    <div class="mt-3">
-                        <button class="btn btn-primary" (click)="addQuestion()"><i class="bi bi-plus-lg"></i> Add Question</button>
-                    </div>
-                </div>
-
-                <div *ngIf="projectApi && projectApi.type === product.chatbot.types[1]">
-                    
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="configChatbotApiCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetQnaForm()"
-                    #closeBtn>
-                    Close
-                </button>
-                <button type="button" class="btn btn-primary" (click)="commitConfig(closeBtn)">Update Config</button>
+    <form>
+        <h5>Profile Config</h5>
+        <div class="mb-3">
+            <label for="botName" class="form-label">Bot Name</label>
+            <input type="text" class="form-control" id="botName" placeholder="Bot Name" #botName>
+            <p>{{botName.value}}</p>
+            <div class="form-text d-flex justify-content-end {{botName.value.length > 20 ? 'text-danger': ''}}">
+                {{botName.value.length > 20 ? "Name Length Exceeded!": ""}} {{botName.value.length}}/20
             </div>
         </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="botProfilePic">Bot Profile Pic</label>
+            <input type="file" class="form-control" id="botProfilePic" accept="image/*">
+          </div>
+    </form>
+
+    <div *ngIf="projectApi && projectApi.type === product.chatbot.types[0]">
+        <h5>QnA Config</h5>
+        <form *ngFor="let form of qnaForms; let i = index" class="mb-3" [formGroup]="form">
+            <div class="d-flex justify-content-between">
+                <label for="question-{{i}}" class="form-label">Question {{i + 1}}.</label>
+                <button class="btn btn-link btn-sm text-danger" (click)="removeQuestion(i)"><i class="bi bi-dash-lg"></i></button>
+            </div>
+            <input type="text" class="form-control border-dark" id="question-{{i}}" placeholder="Question to be listed on chatbot" formControlName="question">
+            <textarea class="form-control border-primary mt-2" id="answer-{{i}}" placeholder="Answer to be given by chatbot" rows="1" formControlName="answer"></textarea>
+        </form>
+        <div class="mt-3">
+            <button class="btn btn-primary" (click)="addQuestion()"><i class="bi bi-plus-lg"></i> Add Question</button>
+        </div>
+    </div>
+
+    <div *ngIf="projectApi && projectApi.type === product.chatbot.types[1]">
+        <h5>Parameters Config</h5>
+        <form>
+            <div class="mb-3">
+                <label for="botEngine" class="form-label">Bot Engine</label>
+                <select class="form-select" aria-label="Language Model" id="botEngine" #botEngine>
+                    <option value="None" selected>Select Bot Engine</option>
+                    <option *ngFor="let engine of product.chatbot.engines | slice: 1" value="{{engine}}">{{engine}}</option>
+                </select>
+            </div>
+            <div *ngIf="botEngine.value !== 'None'">
+                <div class="mb-3">
+                    <label for="languageModel" class="form-label">Language Model</label>
+                    <select class="form-select" aria-label="Language Model" id="languageModel">
+                        <option selected>Select Language Model</option>
+                        <option *ngFor="let model of product.chatbot.models[botEngine.value]" value="{{model}}">{{model}}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-primary" (click)="commitConfig()">Update Config</button>
     </div>
 </div>

@@ -1,37 +1,50 @@
-<div class="d-flex justify-content-end">
-    <app-create-project-api [project]="project"></app-create-project-api>
-    <button class="btn btn-success" (click)="openCreateApiDialog()">
-        <i class="bi bi-plus-lg"></i> Create API
-    </button>
+<div *ngIf="currentTab === tabs.home">
+    <div class="d-flex justify-content-end">
+        <app-create-project-api [project]="project"></app-create-project-api>
+        <button class="btn btn-success" (click)="openCreateApiDialog()">
+            <i class="bi bi-plus-lg"></i> Create API
+        </button>
+    </div>
+    
+    <div class="c-project-api-table mt-3">
+        <table class="table table-hover">
+            <thead class="border-bottom">
+                <th scope="col" style="padding: 0.5rem 0.5rem;">#</th>
+                <th scope="col" style="padding: 0.5rem 0.5rem;">Project</th>
+                <th scope="col" style="padding: 0.5rem 0.5rem;">Product</th>
+                <th scope="col" style="padding: 0.5rem 0.5rem;">ApiKey</th>
+                <th scope="col" style="padding: 0.5rem 0.5rem;">Options</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let api of projectApis; index as i">
+                    <th scope="col">{{i + 1}}</th>
+                    <td>{{api.project.name}}</td>
+                    <td>{{api.product}}</td>
+                    <td>C_XX....XXXX....XXXX</td>
+                    <td class="d-flex gap-3">
+                        <button class="btn btn-light btn-sm" (click)="openViewApiDialog(api)">View</button> 
+                        <button class="btn btn-light btn-sm" (click)="openConfigApiTab(api)">Config</button> 
+                        <button class="btn btn-light btn-sm" (click)="openDeleteApiDialog(api)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <app-view-project-api [projectApi]="projectApiSelected"></app-view-project-api>
+    <app-delete-project-api [projectApi]="projectApiSelected"></app-delete-project-api>
 </div>
 
-<div class="c-project-api-table mt-3">
-    <table class="table table-hover">
-        <thead class="border-bottom">
-            <th scope="col" style="padding: 0.5rem 0.5rem;">#</th>
-            <th scope="col" style="padding: 0.5rem 0.5rem;">Project</th>
-            <th scope="col" style="padding: 0.5rem 0.5rem;">Product</th>
-            <th scope="col" style="padding: 0.5rem 0.5rem;">ApiKey</th>
-            <th scope="col" style="padding: 0.5rem 0.5rem;">Options</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let api of projectApis; index as i">
-                <th scope="col">{{i + 1}}</th>
-                <td>{{api.project.name}}</td>
-                <td>{{api.product}}</td>
-                <td>C_XX....XXXX....XXXX</td>
-                <td class="d-flex gap-3">
-                    <button class="btn btn-light btn-sm" (click)="openViewApiDialog(api)">View</button> 
-                    <button class="btn btn-light btn-sm" (click)="openConfigApiDialog(api)">Config</button> 
-                    <button class="btn btn-light btn-sm" (click)="openDeleteApiDialog(api)">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div *ngIf="currentTab === tabs.config.chatbot">
+    <div class="d-flex justify-content-between align-items-center gap-3">
+        <h5 class="m-0 text-muted">API Configuration | {{projectApiSelected?.product}} - {{projectApiSelected?.type}}</h5>
+        <button class="btn btn-outline-secondary" (click)="resetTab()">
+            <i class="bi bi-x-lg"></i> Close
+        </button>
+    </div>
+
+    <app-config-chatbot-api [projectApi]="projectApiSelected" (closeConfig)="resetTab($event)"></app-config-chatbot-api>
 </div>
 
-<app-view-project-api [projectApi]="projectApiSelected"></app-view-project-api>
-<app-delete-project-api [projectApi]="projectApiSelected"></app-delete-project-api>
-<app-config-chatbot-api [projectApi]="projectApiSelected"></app-config-chatbot-api>

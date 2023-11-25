@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/constants/products';
 import { Api } from 'src/app/models/api';
@@ -11,6 +11,7 @@ import { ChatbotService } from '../../../../services/chatbot/chatbot.service';
 })
 export class ConfigChatbotApiComponent implements OnInit {
   @Input() projectApi: Api | null = null;
+  @Output() closeConfig = new EventEmitter<any>();
   product = Product;
   qnaForms: FormGroup[] = [];
   error: string | null = null;
@@ -21,27 +22,27 @@ export class ConfigChatbotApiComponent implements OnInit {
     this.addQuestion();
   }
 
-  commitConfig(closeBtn: HTMLButtonElement) {
+  commitConfig() {
     this.error = null;
     if (this.projectApi && this.projectApi.type === this.product.chatbot.types[0]) {
       if (this.qnaForms.map(f => f.controls['question'].value === '' && f.controls['answer'].value === '' ).includes(true)) {
         this.error = 'Please, provide value for each QnA.'
         return;
       }
-      const configuration = this.qnaForms.map(f => ({question: f.value.question, answer: f.value.answer}));
+      const dataForQna = this.qnaForms.map(f => ({question: f.value.question, answer: f.value.answer}));
       this.chatbotService.setConfig({
         apiId: this.projectApi!.id,
-        config: { qna: configuration },
-        data: {}
+        config: {},
+        data: { qna: dataForQna }
       }).subscribe(res => {
         if (res.success()) {
-          closeBtn.click();
+          this.closeConfig.emit();
         } else {
           this.error = res.error();
         }
       });
     } else if (this.projectApi && this.projectApi.type === this.product.chatbot.types[1]) {
-      
+      // Todo
     }
   }
   

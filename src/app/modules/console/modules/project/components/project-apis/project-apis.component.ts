@@ -15,10 +15,19 @@ export class ProjectApisComponent implements OnInit {
   project: Project | null = null;
   projectApis: Api[] = [];
   projectApiSelected: Api | null = null;
+  tabs = {
+    home: 'home',
+    config: {
+      chatbot: 'config-chatbot',
+      emforms: 'config-emforms'
+    }
+  }
+  currentTab = this.tabs.home;
 
   constructor(private projectService: ProjectService, private workingProjectService: WorkingProjectService, private projectApiService: ProjectApiService) { }
 
   ngOnInit(): void {
+    this.resetTab();
     this.workingProjectService.getWorkingProjectId$.subscribe(id => {
       if (id !== null) {
         this.projectService.getProject(id).subscribe(project => {
@@ -47,15 +56,19 @@ export class ProjectApisComponent implements OnInit {
     document.getElementById('viewProjectApiBtn')?.click();
   }
 
-  openConfigApiDialog(projectApi: Api) {
-    this.projectApiSelected = projectApi;
-    if (projectApi.product === Product.chatbot.name) {
-      document.getElementById('configChatbotApiBtn')?.click();
-    }
-  }
-  
   openDeleteApiDialog(projectApi: Api) {
     this.projectApiSelected = projectApi;
     document.getElementById('deleteProjectApiBtn')?.click();
+  }
+
+  openConfigApiTab(projectApi: Api) {
+    this.projectApiSelected = projectApi;
+    if (projectApi.product === Product.chatbot.name) {
+      this.currentTab = this.tabs.config.chatbot;
+    }
+  }
+
+  resetTab(event?: string) {
+    this.currentTab = this.tabs.home;
   }
 }
