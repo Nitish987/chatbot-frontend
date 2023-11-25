@@ -4,6 +4,7 @@ import { HttpService } from '../http/http.service';
 import { BehaviorSubject, map } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { ResponseCollector } from 'src/app/utils/response-collector';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class UserService {
   constructor(private authorization: AuthorizationService, private http: HttpService) { }
 
   private setUser(u: User) {
+    u.profile.photo = environment.host + u.profile.photo;
     UserService.user = u;
     UserService.user$.next(UserService.user);
   }
