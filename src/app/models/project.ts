@@ -6,5 +6,6 @@ export interface Project {
     name: string;
     description: string;
     envtype: string;
+    host: { [urls: string]: string[] };
     createdon: string;
 }

@@ -46,7 +46,7 @@ export class ProjectService {
     return ProjectService.projects$;
   }
 
-  createProject(data: {name: string, description: string, envtype: string}) {
+  createProject(data: {name: string, description: string, envtype: string, host: string}) {
     return this.http.post('/project/v1/project/', data).pipe(map(res => {
       try {
         const collector = new ResponseCollector(res);
@@ -74,7 +74,7 @@ export class ProjectService {
     }));
   }
 
-  updateProject(id: string, data: {name: string, description: string, envtype: string}) {
+  updateProject(id: string, data: {name: string, description: string, envtype: string, host: string}) {
     return this.http.put(`/project/v1/project/?id=${id}`, data).pipe(map(res => {
       try {
         const collector = new ResponseCollector(res);

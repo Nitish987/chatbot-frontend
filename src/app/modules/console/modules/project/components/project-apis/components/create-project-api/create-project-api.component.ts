@@ -13,8 +13,7 @@ export class CreateProjectApiComponent {
   @Input() project: Project | null = null;
   apiForm = new FormGroup({
     product: new FormControl('', [Validators.required]),
-    type: new FormControl('', [Validators.required]),
-    host: new FormControl('', [Validators.required]),
+    type: new FormControl('', [Validators.required])
   });
   error: string | null = null;
   product = Product;
@@ -32,12 +31,8 @@ export class CreateProjectApiComponent {
       this.error = 'Please select the product type.';
       return;
     }
-    if (!this.apiForm.value.host!.startsWith('http')) {
-      this.error = 'Please enter valid host url.';
-      return;
-    }
     if (this.apiForm.valid && this.project) {
-      this.projectApiService.createApi(this.project.id, this.apiForm.value.product!, this.apiForm.value.type!, this.apiForm.value.host!).subscribe(res => {
+      this.projectApiService.createApi(this.project.id, this.apiForm.value.product!, this.apiForm.value.type!).subscribe(res => {
         if (res.success()) {
           closeBtn.click();
           this.resetForm();
@@ -57,8 +52,7 @@ export class CreateProjectApiComponent {
     this.error = null;
     this.apiForm.setValue({
       product: '',
-      type: '',
-      host: ''
+      type: ''
     });
   }
 }

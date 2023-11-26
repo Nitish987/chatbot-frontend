@@ -12,7 +12,8 @@ export class CreateProjectComponent {
   projectFrom = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]),
     description: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(200)]),
-    envtype: new FormControl('DEVELOPMENT', [Validators.required])
+    envtype: new FormControl('DEVELOPMENT', [Validators.required]),
+    host: new FormControl('', [Validators.required])
   });
   error: string | null = null;
 
@@ -28,11 +29,16 @@ export class CreateProjectComponent {
       this.error = 'Description must have atleast 20 character and max to 200 characters.';
       return;
     }
+    if (!this.projectFrom.value.host!.startsWith('http')) {
+      this.error = 'Please enter valid host url.';
+      return;
+    }
     if (this.projectFrom.valid) {
       this.projectService.createProject({
         name: this.projectFrom.value.name!,
         description: this.projectFrom.value.description!,
-        envtype: this.projectFrom.value.envtype!
+        envtype: this.projectFrom.value.envtype!,
+        host: this.projectFrom.value.host!,
       }).subscribe(res => {
         if (res.success()) {
           this.router.navigateByUrl(`/console/project/${res.data()['project']['id']}/dashboard`);

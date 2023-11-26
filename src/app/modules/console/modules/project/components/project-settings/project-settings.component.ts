@@ -14,7 +14,8 @@ export class ProjectSettingsComponent implements OnInit {
   projectFrom = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]),
     description: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(200)]),
-    envtype: new FormControl('DEVELOPMENT', [Validators.required])
+    envtype: new FormControl('DEVELOPMENT', [Validators.required]),
+    host: new FormControl('', [Validators.required])
   });
   error: string | null = null;
   success: string | null = null;
@@ -30,7 +31,8 @@ export class ProjectSettingsComponent implements OnInit {
             this.projectFrom.setValue({
               name: project.name,
               description: project.description,
-              envtype: project.envtype
+              envtype: project.envtype,
+              host: project.host['urls'].join(',')
             });
           }
         });
@@ -51,11 +53,16 @@ export class ProjectSettingsComponent implements OnInit {
       this.error = 'Description must have atleast 20 character and max to 200 characters.';
       return;
     }
+    if (!this.projectFrom.value.host!.startsWith('http')) {
+      this.error = 'Please enter valid host url.';
+      return;
+    }
     if (this.projectFrom.valid && this.project) {
       this.projectService.updateProject(this.project.id, {
         name: this.projectFrom.value.name!,
         description: this.projectFrom.value.description!,
-        envtype: this.projectFrom.value.envtype!
+        envtype: this.projectFrom.value.envtype!,
+        host: this.projectFrom.value.host!
       }).subscribe(res => {
         if (res.success()) {
           this.success = 'Project Settings Updated.';
