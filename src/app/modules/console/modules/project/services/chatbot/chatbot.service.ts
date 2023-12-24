@@ -10,7 +10,7 @@ export class ChatbotService {
 
   constructor(private http: HttpService) { }
 
-  setConfig(data: {apiId: number, name: string, photo: File, greeting: string, engine: string, model: string, sysPrompt: string, knowledge: string, config: any, data: any}) {
+  setConfig(data: {apiId: number, name: string, photo: File, greeting: string, engine: string, model: string, sysPrompt: string, knowledge: string, useEmform: boolean, whenEmfrom: string, emformConfigId: number, config: any, data: any}) {
     const formData = new FormData();
     formData.append('api_id', data.apiId.toString());
     formData.append('name', data.name);
@@ -20,6 +20,9 @@ export class ChatbotService {
     formData.append('model', data.model);
     formData.append('sys_prompt', data.sysPrompt);
     formData.append('knowledge', data.knowledge);
+    formData.append('use_emform', data.useEmform ? 'true' : 'false');
+    formData.append('when_emform', data.whenEmfrom);
+    formData.append('emform_config_id', data.emformConfigId.toString());
     formData.append('config', data.config);
     formData.append('data', data.data);
     return this.http.post('/chatbot/v1/config/', formData).pipe(map(res => {

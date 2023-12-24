@@ -65,6 +65,8 @@ export class ProjectApisComponent implements OnInit {
     this.projectApiSelected = projectApi;
     if (projectApi.product === Product.chatbot.name) {
       this.currentTab = this.tabs.config.chatbot;
+    } else if (projectApi.product === Product.emforms.name) {
+      this.currentTab = this.tabs.config.emforms;
     }
   }
 

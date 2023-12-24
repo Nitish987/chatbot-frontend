@@ -67,6 +67,14 @@
                     <textarea class="form-control" id="knowledge" rows="3" placeholder="Extra knowledge given to Bot" formControlName="knowledge"></textarea>
                 </div>
                 <div class="mb-3">
+                    <input class="form-check-input" type="checkbox" id="flexCheckDefault" (change)="onUseEmform($event)">
+                    <label class="form-check-label mx-2" for="flexCheckDefault"> Use Emform inside chatbot</label>
+                </div>
+                <div class="mb-3" *ngIf="isEmformAllowed">
+                    <label for="whenEmform" class="form-label">When to use this form ({{emform?.name}})</label>
+                    <input type="text" class="form-control" id="whenEmform" placeholder="Specify when to popup this form" formControlName="whenEmform">
+                </div>
+                <div class="mb-3">
                     <label for="temperature" class="form-label">Temperature <span class="text-muted">(0.00 - 1.00)</span></label>
                     <input type="number" class="form-control" id="temperature" placeholder="Temperature" formControlName="temperature" min="0" max="1">
                 </div>

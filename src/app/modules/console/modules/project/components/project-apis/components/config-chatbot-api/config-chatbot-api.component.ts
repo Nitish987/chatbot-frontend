@@ -3,6 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/constants/products';
 import { Api } from 'src/app/models/api';
 import { ChatbotService } from '../../../../services/chatbot/chatbot.service';
+import { EmformService } from '../../../../services/emform/emform.service';
+import { Emform } from 'src/app/models/emform';
+import { ProjectApiService } from '../../../../services/project-api/project-api.service';
 
 @Component({
   selector: 'app-config-chatbot-api',
@@ -24,13 +27,16 @@ export class ConfigChatbotApiComponent implements OnInit {
     languageModel: new FormControl('None', [Validators.required]),
     sysPrompt: new FormControl('', [Validators.required, Validators.maxLength(200)]),
     knowledge: new FormControl('', [Validators.required]),
+    whenEmform: new FormControl('', [Validators.required]),
     temperature: new FormControl(0, [Validators.required, Validators.min(0), Validators.max(1)]),
     maxTokens: new FormControl(200, [Validators.required, Validators.min(1), Validators.max(2048)])
   });
+  emform: Emform | null = null;
   isOtherParameterVisible = false;
+  isEmformAllowed = false;
   error: string | null = null;
 
-  constructor(private chatbotService: ChatbotService) { }
+  constructor(private chatbotService: ChatbotService, private emformService: EmformService, private projectApiService: ProjectApiService) { }
 
   ngOnInit(): void {
     this.addQuestion();
@@ -65,6 +71,9 @@ export class ConfigChatbotApiComponent implements OnInit {
         model: '',
         sysPrompt: '',
         knowledge: '',
+        useEmform: false,
+        whenEmfrom: '',
+        emformConfigId: 0,
         config: JSON.stringify({}),
         data: JSON.stringify({ qna: dataForQna })
       }).subscribe(res => {
@@ -91,6 +100,10 @@ export class ConfigChatbotApiComponent implements OnInit {
         this.error = 'Knowledge is required.'
         return;
       }
+      if (this.isEmformAllowed && this.paramsForm.value.whenEmform === '') {
+        this.error = 'Please, specify when Emform will popup.'
+        return;
+      }
       if (this.paramsForm.value.temperature && this.paramsForm.value.temperature < 0 && this.paramsForm.value.temperature > 1) {
         this.error = 'Temperature must be in range of 0 to 1.'
         return;
@@ -108,6 +121,9 @@ export class ConfigChatbotApiComponent implements OnInit {
         model: this.paramsForm.value.languageModel!,
         sysPrompt: this.paramsForm.value.sysPrompt!,
         knowledge: this.paramsForm.value.knowledge!,
+        useEmform: this.isEmformAllowed,
+        whenEmfrom: this.paramsForm.value.whenEmform!,
+        emformConfigId: this.emform!.id,
         config: JSON.stringify({
           'temperature': this.paramsForm.value.temperature!,
           'maxToken': this.paramsForm.value.maxTokens!
@@ -143,7 +159,21 @@ export class ConfigChatbotApiComponent implements OnInit {
     this.isOtherParameterVisible = event.target.value !== 'None'
   }
 
-  resetAiFrom() {
-    
+  onUseEmform(event: any) {
+    this.isEmformAllowed = event.target.checked;
+    if (this.projectApi && this.isEmformAllowed) {
+      this.projectApiService.getProjectApis$.subscribe(apis => {
+        const apiId = apis.find(api => api.product == Product.emforms.name)?.id;
+        if (apiId) {
+          this.emformService.getConfig(apiId).subscribe(res => {
+            if (res.success()) {
+              this.emform = res.data()['config'];
+            }
+          });
+        }
+      });
+    }
   }
+
+  resetAiFrom() {}
 }
