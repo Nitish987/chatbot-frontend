@@ -15,6 +15,23 @@
               <li>Product - {{projectApi?.product}}</li>
               <li *ngIf="projectApi">Type - {{productTypes[projectApi!.type]}}</li>
             </ul>
+            <h6>Project ID</h6>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Project ID" aria-label="Project ID" aria-describedby="project-id-copy" value="{{projectApi?.project?.id}}" disabled>
+              <button class="btn btn-outline-success" type="button" id="project-id-copy" (click)="copyValue(projectApi?.project?.id)">
+                <i *ngIf="!isCopied" class="bi bi-clipboard"></i>
+                <i *ngIf="isCopied" class="bi bi-clipboard-check-fill"></i>
+              </button>
+            </div>
+            <h6>API ID</h6>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Api ID" aria-label="Api ID" aria-describedby="api-id-copy" value="{{projectApi?.id}}" disabled>
+              <button class="btn btn-outline-success" type="button" id="api-id-copy" (click)="copyValue(projectApi?.id)">
+                <i *ngIf="!isCopied" class="bi bi-clipboard"></i>
+                <i *ngIf="isCopied" class="bi bi-clipboard-check-fill"></i>
+              </button>
+            </div>
+            <h6>API Key</h6>
             <div class="input-group">
               <input type="text" class="form-control" placeholder="API KEY" aria-label="Api Key" aria-describedby="api-key-copy" value="C_XX....XXXX....XXXX" disabled>
               <button class="btn btn-outline-success" type="button" id="api-key-copy" (click)="copyApiKey()">

@@ -15,16 +15,21 @@ export class ViewProjectApiComponent {
 
   constructor(private projectApiService: ProjectApiService) {}
 
+  copyValue(value: any) {
+    this.isCopied = true;
+    navigator.clipboard.writeText(value);
+    setTimeout(() => {
+      this.isCopied = false;
+    }, 1000);
+  }
+
   copyApiKey() {
     if (this.projectApi && !this.isCopied) {
       this.isCopied = true;
       this.projectApiService.viewApi(this.projectApi.project.id, this.projectApi.id).subscribe((res) => {
         if (res.success()) {
-          navigator.clipboard.writeText(res.data()['apikey']);
+          this.copyValue(res.data()['apikey']);
         }
-        setTimeout(() => {
-          this.isCopied = false;
-        }, 1000);
       });
     }
   }
