@@ -1,1 +1,8 @@
-<p>project-dashboard works!</p>
+<div class="container mt-3 p-5 border rounded-4 d-flex justify-content-between">
+    <span class="h3">Price to Pay</span>
+    <span class="h3">Rs. {{billing.priceToPay}}</span>
+</div>
+
+<div class="chart-container mt-5">
+    <canvas id="projectBillingChart">{{ chart }}</canvas>
+</div>

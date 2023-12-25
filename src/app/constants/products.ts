@@ -4,12 +4,14 @@ interface ChatbotType {
   typesDesc: { [type: string]: string };
   engines: string[];
   models: { [model: string]: string[] };
+  price: number;
 }
 
 interface EmFormsType {
   name: string;
   types: string[];
   typesDesc: { [type: string]: string };
+  price: number;
 }
 
 const Chatbot = Object.freeze({
@@ -25,6 +27,7 @@ const Chatbot = Object.freeze({
     'OpenAI-ChatGPT': ['gpt-3.5-turbo'],
     'Google-Bard': ['Palm-2'],
   },
+  price: 0.15
 });
 
 const Emforms = Object.freeze({
@@ -35,6 +38,7 @@ const Emforms = Object.freeze({
     MULTIPART: 'Multipart Body',
   },
   models: [],
+  price: 1
 });
 
 export class Product {

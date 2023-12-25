@@ -6,5 +6,6 @@ export interface Api {
     product: string;
     type: string;
     apikey: string;
+    hitsCount: number;
     createdon: string;
 }

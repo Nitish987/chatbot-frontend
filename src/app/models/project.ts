@@ -7,5 +7,7 @@ export interface Project {
     description: string;
     envtype: string;
     host: { [urls: string]: string[] };
+    priceToPay: number;
+    nextPricingDate: string;
     createdon: string;
 }

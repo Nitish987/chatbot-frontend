@@ -1,1 +1,48 @@
-<p>main works!</p>
+<div class="c-billing">
+    <h3>Billing</h3>
+
+    <div class="container-fluid mt-3">
+        <div class="chart-container">
+            <canvas id="billingChart">{{ chart }}</canvas>
+        </div>
+
+        <div class="mt-5">
+            <h4>Project Price</h4>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item" *ngFor="let project of billings">
+                    <h2 class="accordion-header">
+                        <div class="accordion-button gap-3" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <span style="flex-grow: 1;">{{project.name}}</span>
+                            <button class="btn btn-primary mr-5">Pay Rs. {{project.priceToPay}}</button>
+                        </div>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">Project</th>
+                                      <th scope="col">Product</th>
+                                      <th scope="col">Hits</th>
+                                      <th scope="col">Charges</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let api of project.apis; index as i">
+                                        <td>{{i + 1}}</td>
+                                        <td>{{project.name}}</td>
+                                        <td>{{api.product}}</td>
+                                        <td>{{api.hitsCount}}</td>
+                                        <td>{{getApiPrice(api)}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
