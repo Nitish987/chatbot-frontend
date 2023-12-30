@@ -1,0 +1,31 @@
+<button id="emformContentBtn" class="d-none" data-bs-toggle="modal" data-bs-target="#emformContent">Emform Content</button>
+<div class="modal fade" id="emformContent" tabindex="-1" aria-labelledby="emformContentLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="emformContentLabel">Emfrom Content</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col" *ngFor="let header of headers">{{header}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of data">
+                      <td *ngFor="let header of headers">{{row[header]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="emformContentCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal" #closeBtn>Close</button>
+          <button type="button" class="btn btn-primary" (click)="downloadExcelSheet()">
+            <i class="bi bi-file-earmark-spreadsheet"></i> Download Excel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

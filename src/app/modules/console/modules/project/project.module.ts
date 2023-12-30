@@ -17,6 +17,7 @@ import { DeleteProjectApiComponent } from './components/project-apis/components/
 import { ConfigChatbotApiComponent } from './components/project-apis/components/config-chatbot-api/config-chatbot-api.component';
 import { ChatbotService } from './services/chatbot/chatbot.service';
 import { ConfigEmformApiComponent } from './components/project-apis/components/config-emform-api/config-emform-api.component';
+import { EmformContentComponent } from './components/project-apis/components/emform-content/emform-content.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ConfigEmformApiComponent } from './components/project-apis/components/c
     ViewProjectApiComponent,
     DeleteProjectApiComponent,
     ConfigChatbotApiComponent,
-    ConfigEmformApiComponent
+    ConfigEmformApiComponent,
+    EmformContentComponent
   ],
   imports: [
     CommonModule,

@@ -23,6 +23,7 @@ export class ProjectApisComponent implements OnInit {
     }
   }
   currentTab = this.tabs.home;
+  product = Product
 
   constructor(private projectService: ProjectService, private workingProjectService: WorkingProjectService, private projectApiService: ProjectApiService) { }
 
@@ -49,6 +50,11 @@ export class ProjectApisComponent implements OnInit {
 
   openCreateApiDialog() {
     document.getElementById('creatProjectApiBtn')?.click();
+  }
+  
+  openContentDialog(projectApi: Api) {
+    this.projectApiSelected = projectApi;
+    document.getElementById('emformContentBtn')?.click();
   }
   
   openViewApiDialog(projectApi: Api) {

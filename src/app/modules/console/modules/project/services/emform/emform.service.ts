@@ -33,4 +33,14 @@ export class EmformService {
     }
    })); 
   }
+
+  getContent(emformId: number) {
+    return this.http.get(`/emforms/v1/content/${emformId}/`).pipe(map(res => {
+      try {
+        return new ResponseCollector(res);
+      } catch(e) {
+        return ResponseCollector.localErrorResponse();
+      }
+     })); 
+  }
 }

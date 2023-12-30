@@ -6,6 +6,7 @@ export interface Api {
     product: string;
     type: string;
     apikey: string;
+    configId: number;
     hitsCount: number;
     createdon: string;
 }

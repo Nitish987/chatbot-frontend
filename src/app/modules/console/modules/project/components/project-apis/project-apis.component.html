@@ -22,8 +22,15 @@
                     <td>{{api.product}}</td>
                     <td>C_XX....XXXX....XXXX</td>
                     <td class="d-flex gap-3">
-                        <button class="btn btn-light btn-sm" (click)="openViewApiDialog(api)">View</button> 
-                        <button class="btn btn-light btn-sm" (click)="openConfigApiTab(api)">Config</button> 
+                        <button class="btn btn-light btn-sm" style="width: 70px;" (click)="openContentDialog(api)" *ngIf="api.product === product.emforms.name">
+                            Content
+                        </button> 
+                        <button class="btn btn-light btn-sm" style="width: 70px;" (click)="openViewApiDialog(api)" *ngIf="api.product === product.chatbot.name">
+                            Creds
+                        </button> 
+                        <button class="btn btn-light btn-sm"(click)="openConfigApiTab(api)">
+                            Config
+                        </button> 
                         <button class="btn btn-light btn-sm" (click)="openDeleteApiDialog(api)">
                             <i class="bi bi-trash"></i>
                         </button>
@@ -34,6 +41,7 @@
     </div>
     
     <app-view-project-api [projectApi]="projectApiSelected"></app-view-project-api>
+    <app-emform-content [projectApi]="projectApiSelected"></app-emform-content>
     <app-delete-project-api [projectApi]="projectApiSelected"></app-delete-project-api>
 </div>
 
